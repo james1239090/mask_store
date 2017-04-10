@@ -9,8 +9,6 @@ class OrdersController < ApplicationController
       @order.calculate_total!(current_cart)
       redirect_to order_path(@order.token)
     else
-      puts "---------"
-      puts "#{@order.errors.messages}"
       render "carts/checkout"
     end
   end
@@ -21,6 +19,16 @@ class OrdersController < ApplicationController
     @order_info = @order.info
     @order_items = @order.items
   end
+
+  def pay_with_credit_card
+    @order = Order.find_by_token(params[:id])
+    @order.set_payment_with!("credit_card")
+    @order.pay!
+
+    redirect_to order_path(@order.token), notice: "成功完成付款"
+  end
+
+
   private
   def order_params
     params.require(:order).permit(info_attributes:[:billing_name,
