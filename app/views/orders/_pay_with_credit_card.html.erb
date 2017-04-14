@@ -1,0 +1,14 @@
+<% payment_service_for  @order,
+                        @order.user.email,
+                        service: :pay2go,
+                        html: { :id => 'pay2go-form', :method => :post } do |service| %>
+  <% service.time_stamp @order.created_at %>
+  <% service.merchant_order_no @order.id %>
+  <% service.amt @order.total.to_i %>
+  <% service.item_desc "sample" %>
+  <% service.email @order.user.email %>
+  <% service.login_type 0 %>
+  <% service.return_url pay2go_cc_notify_order_url(@order.token) %>
+  <% service.encrypted_data %>
+  <%= submit_tag '以智付通付款', class: "btn btn-lg btn-danger" %>
+<% end %>

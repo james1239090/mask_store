@@ -44,7 +44,9 @@
     </table>
     <% if !@order.is_paid? %>
       <div class="pull-right">
-        <%= link_to("以信用卡付款",pay_with_credit_card_order_path(@order.token),class:"btn btn-lg btn-danger") %>
+        <%= render "pay_with_credit_card", order:@order %>
+      </div>
+      <div class="pull-right">
         <%= link_to("以ATM付款","#",class:"btn btn-lg btn-danger") %>
       </div>
     <% else %>

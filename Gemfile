@@ -43,6 +43,8 @@ gem 'mini_magick'
 gem 'font-awesome-rails'
 gem 'aasm'
 gem 'roadie'
+gem 'active_merchant_pay2go'
+gem 'figaro'
 
 
 group :development, :test do
@@ -59,6 +61,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
+  gem 'pry'
 end
 
 group :production do

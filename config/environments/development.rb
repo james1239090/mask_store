@@ -54,4 +54,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = {host: 'localhost:3000'}
   config.action_mailer.delivery_method = :letter_opener
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :development
+  end
 end
