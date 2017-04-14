@@ -98,5 +98,5 @@ Rails.application.configure do
     authentication: :plain
   }
 
-  config.action_mailer.default_url_options = { host: 'nameless-brook-87824.herokuapp.com'}
+  config.action_mailer.default_url_options = { host: 'maskstore-james.herokuapp.com'}
 end
