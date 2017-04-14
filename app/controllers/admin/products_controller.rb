@@ -8,7 +8,7 @@ class Admin::ProductsController < AdminController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to admin_products_path
+      re
     else
       puts "-----------------"
       puts "#{@product.errors.messages}"
@@ -30,7 +30,7 @@ class Admin::ProductsController < AdminController
   end
 
   def update
-    @product = Product.find(parmas[:id])
+    @product = Product.find(params[:id])
 
 
 
