@@ -45,6 +45,7 @@ gem 'aasm'
 gem 'roadie'
 gem 'active_merchant_pay2go'
 gem 'figaro'
+gem 'fog'
 
 
 group :development, :test do
