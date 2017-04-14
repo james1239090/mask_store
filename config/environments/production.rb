@@ -97,4 +97,6 @@ Rails.application.configure do
     domail: "sandbox7255d735e4884f46b53fafeae67a0d27.mailgun.org",
     authentication: :plain
   }
+
+  config.action_mailer.default_url_options = { host: 'nameless-brook-87824.herokuapp.com'}
 end
