@@ -46,6 +46,7 @@ gem 'roadie'
 gem 'active_merchant_pay2go'
 gem 'figaro'
 gem 'fog'
+gem 'delayed_job_active_record'
 
 
 group :development, :test do
