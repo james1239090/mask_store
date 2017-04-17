@@ -3,7 +3,9 @@
     <div class="col-sx-6 col-md-3">
     <%= link_to product_path(product) do %>
       <% if product.photo.present? %>
-          <%= image_tag(product.photo.image.thumb.url,class:"thumbnail") %>
+       <% product.photo.images.each do |image| %>
+          <%= image_tag(image.thumb.url,class:"thumbnail") %>
+          <% end %>
       <% else %>
 <%= image_tag("http://placehold.it/200x200&text=No Pic",class:"thumbnail") %>
       <% end %>

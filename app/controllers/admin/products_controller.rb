@@ -33,7 +33,6 @@ class Admin::ProductsController < AdminController
     @product = Product.find(params[:id])
 
 
-
     if @product.update(product_params)
       redirect_to admin_products_path
     else
@@ -53,7 +52,7 @@ class Admin::ProductsController < AdminController
   private
 
   def product_params
-    params.require(:product).permit(:title,:description,:quantity,:price, photo_attributes:[:image,:id])
+    params.require(:product).permit(:title,:description,:quantity,:price, photo_attributes:[:id,{images:[]}])
   end
 
 end

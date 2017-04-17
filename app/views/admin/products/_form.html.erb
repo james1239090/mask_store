@@ -1,4 +1,4 @@
-<%= simple_form_for [:admin,@product] do |f| %>
+<%= simple_form_for [:admin,@product]  do |f| %>
   <div class="group">
     <%= f.input :title %>
   </div>
@@ -11,13 +11,15 @@
   <div class="group">
     <%= f.input :price %>
   </div>
-  <% if @photo.image.present? %>
-      <span>目前商品圖</span><br>
-      <%= image_tag(@photo.image.thumb.url) %>
+  <% if @photo.present? %>
+    <span>目前商品圖</span><br>
+    <% @photo.images.each do |image| %>
+      <%= image_tag(image.thumb.url) %>
+    <% end %>
   <% end %>
   <div class="form-group">
     <%= f.simple_fields_for :photo do |c| %>
-      <%= c.input :image , as: :file %>
+      <%= c.input :images , as: :file, input_html: { multiple: 'multiple'} %>
     <% end %>
   </div>
   <%= f.submit "Submit", data:{disable_with: "Submitting..."} %>
