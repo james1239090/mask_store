@@ -17,10 +17,13 @@
       <%= image_tag(image.thumb.url) %>
     <% end %>
   <% end %>
-  <div class="form-group">
+  <div id="myDropzone" class="dropzone">
     <%= f.simple_fields_for :photo do |c| %>
-      <%= c.input :images , as: :file, input_html: { multiple: 'multiple'} %>
+      <div class="fallback">
+        <%= c.input :images , as: :file, input_html: { multiple: 'multiple'} %>
+      </div>
     <% end %>
   </div>
-  <%= f.submit "Submit", data:{disable_with: "Submitting..."} %>
+  <br>
+  <%= f.submit "Submit", class:"btn btn-info pull-right",data:{disable_with: "Submitting..."} %>
 <% end %>

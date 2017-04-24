@@ -31,8 +31,6 @@ class Admin::ProductsController < AdminController
 
   def update
     @product = Product.find(params[:id])
-
-
     if @product.update(product_params)
       redirect_to admin_products_path
     else
@@ -44,15 +42,15 @@ class Admin::ProductsController < AdminController
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
-
     redirect_to admin_products_path
-
   end
 
   private
-
   def product_params
-    params.require(:product).permit(:title,:description,:quantity,:price, photo_attributes:[:id,{images:[]}])
+    if params.dig(:product,:photo_attributes,:images)
+      params[:product][:photo_attributes][:images] = params[:product][:photo_attributes][:images].values
+    end
+    params.require(:product).permit(:title,:description,:quantity,:price, photo_attributes:[:id,{ images:[] }])
   end
 
 end

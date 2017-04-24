@@ -1,2 +1,39 @@
 <h2>新增產品</h2>
 <%= render "form" %>
+<script type="text/javascript">
+  $(function(){
+      var myDropzone = new Dropzone("#myDropzone", {
+        url: "/admin/products",
+        paramName: "product[photo_attributes][images]",
+        uploadMultiple: true,
+        addRemoveLinks: true,
+        autoProcessQueue: false,
+        parallelUploads: 100,
+        maxFiles: 100,
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        init: function() {
+          var myDropzone = this;
+          $("input[type='submit']").on("click", function(e) {
+              if (myDropzone.getQueuedFiles().length > 0){
+                e.preventDefault();
+                e.stopPropagation();
+                myDropzone.processQueue();
+                return;
+              }
+          });
+          this.on("sendingmultiple", function(data, xhr, formData) {
+            formData.append("product[title]",$('#product_title').val());
+            formData.append("product[description]",$('#product_description').val());
+            formData.append("product[quantity]",$('#product_quantity').val());
+            formData.append("product[price]",$('#product_price').val());
+          });
+          this.on("successmultiple", function(files, response) {
+            window.location.href = '<%= admin_products_path %>'
+          });
+        }
+      });
+
+    });
+</script>
