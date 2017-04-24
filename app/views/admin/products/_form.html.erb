@@ -11,12 +11,7 @@
   <div class="group">
     <%= f.input :price %>
   </div>
-  <% if @photo.present? %>
-    <span>目前商品圖</span><br>
-    <% @photo.images.each do |image| %>
-      <%= image_tag(image.thumb.url) %>
-    <% end %>
-  <% end %>
+
   <div id="myDropzone" class="dropzone">
     <%= f.simple_fields_for :photo do |c| %>
       <div class="fallback">

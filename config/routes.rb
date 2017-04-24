@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root "products#index"
 
   namespace :admin do
-    resources :products
+    resources :products do
+      resources :photos, only: [:create, :destroy]
+    end
     resources :orders do
       member do
         post :cancel
