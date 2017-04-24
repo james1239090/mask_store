@@ -90,6 +90,8 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    dropzonejs-rails (0.7.3)
+      rails (> 3.1)
     erubis (2.7.0)
     excon (0.55.0)
     execjs (2.7.0)
@@ -396,6 +398,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   delayed_job_active_record
   devise
+  dropzonejs-rails
   figaro
   fog
   font-awesome-rails

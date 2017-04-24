@@ -15,4 +15,9 @@
 //= require turbolinks
 //= require bootstrap/dropdown
 //= require bootstrap/alert
+//= require dropzone
 //= require_tree .
+
+$(function() {
+  Dropzone.autoDiscover = false;
+});

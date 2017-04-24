@@ -47,6 +47,7 @@ gem 'active_merchant_pay2go'
 gem 'figaro'
 gem 'fog'
 gem 'delayed_job_active_record'
+gem 'dropzonejs-rails'
 
 
 group :development, :test do
