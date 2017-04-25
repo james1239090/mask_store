@@ -37,6 +37,9 @@ class Admin::PhotosController < ApplicationController
   end
 
   def add_more_images(new_images)
+    if !@product.photo.present?
+      @product.build_photo
+    end
     images = @product.photo.images
     images += new_images
     @product.photo.images = images
