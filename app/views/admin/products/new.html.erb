@@ -24,13 +24,12 @@
               }
           });
           this.on("sendingmultiple", function(data, xhr, formData) {
-            formData.append("product[title]",$('#product_title').val());
-            formData.append("product[description]",$('#product_description').val());
-            formData.append("product[quantity]",$('#product_quantity').val());
-            formData.append("product[price]",$('#product_price').val());
+            $("form").find("input").each(function(){
+              formData.append($(this).attr("name"), $(this).val());
+            });
           });
           this.on("successmultiple", function(files, response) {
-            window.location.href = '<%= admin_products_path %>'
+             window.location.href = '<%= admin_products_path %>'
           });
         }
       });

@@ -50,7 +50,7 @@ class Admin::ProductsController < AdminController
     if params.dig(:product,:photo_attributes,:images)
       params[:product][:photo_attributes][:images] = params[:product][:photo_attributes][:images].values
     end
-    params.require(:product).permit(:title,:description,:quantity,:price, photo_attributes:[:id,{ images:[] }])
+    params.require(:product).permit(:title,:description,:quantity,:price, photo_attributes:[:id,{ images:[] }], sizes_attributes:[:id,:name,:_destroy])
   end
 
 end
