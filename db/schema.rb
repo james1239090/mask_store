@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425035422) do
+ActiveRecord::Schema.define(version: 20170504065535) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -45,6 +45,12 @@ ActiveRecord::Schema.define(version: 20170425035422) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "dimensions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "order_infos", force: :cascade do |t|
@@ -86,6 +92,14 @@ ActiveRecord::Schema.define(version: 20170425035422) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_options", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "dimension_id"
+    t.integer  "color_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -95,11 +109,31 @@ ActiveRecord::Schema.define(version: 20170425035422) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "sizes", force: :cascade do |t|
-    t.string   "name"
+  create_table "purchase_items", force: :cascade do |t|
+    t.integer  "purchase_id"
+    t.string   "dimension"
+    t.string   "color"
+    t.integer  "quantity"
+    t.float    "currency_price"
+    t.float    "tw_price"
+    t.float    "duty"
+    t.float    "shipping_fee"
+    t.float    "service_fee"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.float    "total_currency_price"
+    t.float    "total_tw_price"
+    t.float    "total_duty"
+    t.float    "total_shipping_fee"
+    t.float    "total_service_fee"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.datetime "purchase_date"
+    t.datetime "delivery_date"
   end
 
   create_table "users", force: :cascade do |t|
