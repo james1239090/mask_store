@@ -1,0 +1,19 @@
+<tr class="nested-fields">
+  <td>
+    <%= f.association :color, :collection => Color.all %>
+    <div class="colors">
+      <%= link_to_add_association 'Add new color', f, :color %>
+    </div>
+  </td>
+  <td>
+    <%= f.association :dimension, :collection => Dimension.all %>
+    <div>
+      <%= link_to_add_association 'Add new dimension', f, :dimension %>
+    </div>
+  </td>
+  <td>
+    <%= link_to_remove_association f, class:"btn" do %>
+      <i class="fa fa-trash"></i>
+    <% end %>
+  </td>
+</tr>

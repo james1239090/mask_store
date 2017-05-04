@@ -52,8 +52,10 @@ class Admin::ProductsController < AdminController
     end
     params.require(:product).permit(:title,:description,:quantity,:price,
                                     photo_attributes:[:id,{ images:[] }],
-                                    sizes_attributes:[:id,:name,:_destroy],
-                                    colors_attributes:[:id,:name,:_destroy])
+                                    product_options_attributes:[:id,:color_id,:dimension_id,:_destroy,
+                                                                dimension_attributes:[:id,:name,:_destroy],
+                                                                color_attributes:[:id,:name,:_destroy]]
+                                    )
   end
 
 end
