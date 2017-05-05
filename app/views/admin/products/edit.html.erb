@@ -36,7 +36,7 @@
                 }
             });
             this.on("successmultiple", function(files, response) {
-              window.location.href = '<%= admin_products_path %>'
+              $('form').submit();
             });
           }
         });

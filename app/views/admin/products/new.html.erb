@@ -24,7 +24,7 @@
               }
           });
           this.on("sendingmultiple", function(data, xhr, formData) {
-            $("form").find("input").each(function(){
+            $("form input, form select").each(function(){
               formData.append($(this).attr("name"), $(this).val());
             });
           });
