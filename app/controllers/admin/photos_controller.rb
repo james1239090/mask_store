@@ -1,4 +1,4 @@
-class Admin::PhotosController < ApplicationController
+class Admin::PhotosController < AdminController
   before_action :find_product, only:[:create,:destroy]
   def create
     add_more_images(photo_params[:images])

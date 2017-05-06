@@ -1,0 +1,38 @@
+<%= simple_form_for [:admin,@purchase]  do |f| %>
+  <label>Purchase Item</label>
+  <div class="row-fluid">
+    <div class="col-md-offset-1">
+      <div class="links">
+        <%= link_to_add_association f, :purchase_items, class:"btn btn-info btn-xs" do %>
+          <i class="fa fa-plus"></i>Add Purchase Item
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.simple_fields_for :purchase_items do |purchase_item| %>
+          <%= render 'purchase_item_fields', f: purchase_item %>
+        <% end %>
+      </div>
+    </div>
+
+
+  <div class="group">
+    <%= f.input :total_tw_price %>
+  </div>
+  <div class="group">
+    <%= f.input :total_duty %>
+  </div>
+  <div class="group">
+    <%= f.input :total_shipping_fee %>
+  </div>
+  <div class="group">
+    <%= f.input :total_service_fee %>
+  </div>
+  <div class="group">
+    <%= f.input :purchase_date,as: :date, html5: true %>
+  </div>
+  <div class="group">
+    <%= f.input :delivery_date,as: :date, html5: true %>
+  </div>
+  <br>
+  <%= f.submit "Submit", class:"btn btn-info pull-right",data:{ disable_with: "Submitting..." } %>
+<% end %>

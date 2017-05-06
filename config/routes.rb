@@ -20,7 +20,7 @@ Rails.application.routes.draw do
         post :to_normal
       end
     end
-
+    resources :product_options, only: :index
     resources :purchases
 
   end

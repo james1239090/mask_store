@@ -17,7 +17,13 @@ class Admin::ProductsController < AdminController
   end
 
   def index
-    @products = Product.all
+    @products = Product.filter(params.slice(:by_name))
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @products
+      end
+    end
   end
 
   def edit
