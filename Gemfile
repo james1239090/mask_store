@@ -49,6 +49,7 @@ gem 'fog'
 gem 'delayed_job_active_record'
 gem 'dropzonejs-rails'
 gem 'cocoon'
+gem 'select2-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -65,6 +66,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
   gem 'pry'
+  gem 'awesome_rails_console'
 end
 
 group :production do

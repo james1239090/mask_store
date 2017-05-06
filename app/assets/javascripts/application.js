@@ -17,6 +17,7 @@
 //= require bootstrap/alert
 //= require dropzone
 //= require cocoon
+//= require select2
 //= require_tree .
 
 $(function() {
