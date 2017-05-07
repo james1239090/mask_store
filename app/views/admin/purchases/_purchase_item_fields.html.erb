@@ -1,17 +1,15 @@
 <div class="row nested-fields form-group">
   <div class="col-md-3">
-    <select class="form-control js-example-basic-single select_product">
-    </select>
+    <%= f.association :product, label: false, input_html:{class:"select_product"} %>
   </div>
   <div class="col-md-3">
-    <select class="form-control js-example-basic-single select_color">
-    </select>
+    <%= f.association :color,label: false, input_html:{class:"select_color"} %>
   </div>
   <div class="col-md-3">
-    <select class="form-control js-example-basic-single select_dimension">
-    </select>
+    <%= f.association :dimension,label: false, input_html:{class:"select_dimension"} %>
   </div>
-  <div class="col-md-2"></div>
+  <div class="col-md-2">
+  </div>
   <div class="col-md-1"></div>
   <%= link_to_remove_association f, class:"btn" do %>
     <i class="fa fa-trash"></i>

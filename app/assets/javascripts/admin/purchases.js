@@ -25,8 +25,9 @@ $(function() {
     selecter.find('option').remove();
   }
 
-  function initDefaultSelectProduct() {
-    $(".select_product").select2({
+  function initDefaultSelectProduct(item) {
+    removeOption(item.find(".select_product"));
+    item.find(".select_product").select2({
       ajax: {
         url: "/admin/products.json",
         dataType: 'json',
@@ -37,6 +38,11 @@ $(function() {
           };
         },
         processResults: function(data, params) {
+
+          data.splice(0, 0, {
+            id: -1,
+            text: 'Select an Product'
+          });
           params.page = params.page || 1;
           return {
             results: data,
@@ -45,13 +51,13 @@ $(function() {
             }
           };
         },
+        placeholder: {
+          id: '-1',
+          text: 'Select an Product'
+        },
         cache: true,
       },
       theme: "bootstrap",
-      placeholder: {
-        id: '-1', // the value of the option
-        text: 'Select an product'
-      },
       escapeMarkup: function(markup) {
         return markup;
       },
@@ -61,8 +67,8 @@ $(function() {
     });
   }
 
-  function initDefaultSelectColorAndDimension() {
-    $('.select_color, .select_dimension').select2({
+  function initDefaultSelectColorAndDimension(item) {
+    item.find('.select_color, .select_dimension').select2({
       theme: "bootstrap",
       placeholder: {
         id: '-1', // the value of the option
@@ -75,10 +81,10 @@ $(function() {
     });
   }
 
-  function addListenerOnSelectProduct() {
-    $('.select_product').on('select2:select', function(e) {
+  function addListenerOnSelectProduct(item) {
+    item.find('.select_product').on('select2:select', function(e) {
       var product_id = $(this).val(),
-        $selct_color = $(this).parent().parent('.row').find('.select_color');
+        $selct_color = $(this).parent().parent().parent('.row').find('.select_color');
 
       $.ajax({
         url: "/admin/product_options.json",
@@ -101,11 +107,11 @@ $(function() {
     });
   }
 
-  function addListenerOnSelectColor() {
-    $('.select_color').on('select2:select', function(e) {
+  function addListenerOnSelectColor(item) {
+    item.find('.select_color').on('select2:select', function(e) {
       var color_id = $(this).val(),
-        $select_product = $(this).parent().parent('.row').find('.select_product'),
-        $selct_dimension = $(this).parent().parent('.row').find('.select_dimension');
+        $select_product = $(this).parent().parent().parent('.row').find('.select_product'),
+        $selct_dimension = $(this).parent().parent().parent('.row').find('.select_dimension');
       $.ajax({
         url: "/admin/product_options.json",
         dataType: "JSON",
@@ -127,10 +133,11 @@ $(function() {
       });
     });
   }
-  $('form').on('cocoon:after-insert', function() {
-    initDefaultSelectProduct();
-    initDefaultSelectColorAndDimension();
-    addListenerOnSelectProduct();
-    addListenerOnSelectColor();
+
+  $('form').on('cocoon:after-insert', function(e, addItem) {
+    initDefaultSelectProduct(addItem);
+    initDefaultSelectColorAndDimension(addItem);
+    addListenerOnSelectProduct(addItem);
+    addListenerOnSelectColor(addItem);
   });
 });

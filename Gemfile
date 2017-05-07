@@ -67,6 +67,7 @@ group :development do
   gem 'letter_opener'
   gem 'pry'
   gem 'awesome_rails_console'
+  gem 'meta_request'
 end
 
 group :production do
