@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504065535) do
+ActiveRecord::Schema.define(version: 20170506082446) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -111,8 +111,8 @@ ActiveRecord::Schema.define(version: 20170504065535) do
 
   create_table "purchase_items", force: :cascade do |t|
     t.integer  "purchase_id"
-    t.string   "dimension"
-    t.string   "color"
+    t.integer  "dimension_id"
+    t.integer  "color_id"
     t.integer  "quantity"
     t.float    "currency_price"
     t.float    "tw_price"
