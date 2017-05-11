@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   include Filterable
 
-  has_one :photo
+  has_one :photo, dependent: :destroy
   has_many :product_options, dependent: :destroy
   has_many :dimensions, :through => :product_options, source: :dimension
   has_many :colors, :through => :product_options, source: :color
