@@ -9,4 +9,18 @@ class ProductOption < ApplicationRecord
   scope :p_id, -> (id) { where( :product_id => "#{id}" )}
   scope :c_id, -> (id) { where( :color_id => "#{id}" )}
   scope :g_id, -> (id) { group("#{id}")}
+  scope :by_color,  -> (id) {
+    joins(:color)
+    .select('color_id as id,colors.name')
+    .where(:product_id => id)
+    .group(:color_id)
+  }
+
+  scope :by_dimension,  -> (id) {
+    joins(:dimension)
+    .select('dimension_id as id,dimensions.name')
+    .where(:product_id => id)
+    .group(:dimension_id)
+  }
+
 end

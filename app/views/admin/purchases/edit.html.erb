@@ -1,2 +1,9 @@
 <h2>修改進貨單</h2>
 <%= render "form" %>
+<script type="text/javascript">
+$(document).on('ready',function(){
+  $('.select_product, .select_color, .select_dimension').select2({});
+    addListenerOnSelectProduct();
+    addListenerOnSelectColor();
+});
+</script>
