@@ -1,2 +1,18 @@
 <h2>進貨</h2>
 <%= link_to("新增進貨單", new_admin_purchase_path, class:"btn btn-info pull-right") %>
+<table class="table">
+  <thead>
+    <th>#</th>
+    <th>Date</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <% @purchases.each do |purchases| %>
+      <tr>
+        <td><%= purchases.id %></td>
+        <td><%= purchases.created_at %></td>
+        <td><%= link_to("Edit", edit_admin_purchase_path(purchases)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

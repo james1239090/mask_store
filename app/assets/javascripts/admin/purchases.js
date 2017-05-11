@@ -74,6 +74,10 @@ function initDefaultSelectColorAndDimension(item) {
     escapeMarkup: function(markup) {
       return markup;
     },
+    placeholder: {
+      id: '-1',
+      text: 'Select an Option'
+    }
   });
 }
 
