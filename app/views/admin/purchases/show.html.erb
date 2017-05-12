@@ -1,0 +1,79 @@
+<h2>進貨資訊</h2>
+<table class="talbe">
+  <tbody>
+    <tr>
+      <td colspan="10">total_currency_price</td>
+      <td><%= @purchase.total_currency_price %></td>
+    </tr>
+    <tr>
+      <td colspan="10">total_tw_price</td>
+      <td><%= @purchase.total_tw_price %></td>
+    </tr>
+    <tr>
+      <td colspan="10">total_duty</td>
+      <td><%= @purchase.total_duty %></td>
+    </tr>
+    <tr>
+      <td colspan="10">total_service_fee</td>
+      <td><%= @purchase.total_service_fee %></td>
+    </tr>
+    <tr>
+      <td colspan="10">purchase_date</td>
+      <td><%= @purchase.purchase_date %></td>
+    </tr>
+    <tr>
+      <td colspan="10">delivery_date</td>
+      <td><%= @purchase.delivery_date %></td>
+
+    </tr>
+    <tr>
+      <td colspan="10">currency_rate</td>
+      <td><%= @purchase.currency_rate %></td>
+    </tr>
+    <tr>
+      <td colspan="10">total_tw_shipping_fee</td>
+      <td><%= @purchase.total_tw_shipping_fee %></td>
+    </tr>
+    <tr>
+      <td colspan="10">total_currency_shipping_fee</td>
+      <td><%= @purchase.total_currency_shipping_fee %></td>
+    </tr>
+  </tbody>
+</table>
+<h2>產品細節</h2>
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th>Color</th>
+    <th>Size</th>
+    <th>Qty</th>
+    <th>Currency Price</th>
+    <th>Tw Price</th>
+    <th>duty</th>
+    <th>shipping</th>
+    <th>service fee</th>
+    <th>Sub Total</th>
+    <th>Total</th>
+  </thead>
+  <tbody>
+    <% @purchase_items.each do |item| %>
+      <tr>
+        <td><%= item.product.title %></td>
+        <td><%= item.color.name %></td>
+        <td><%= item.dimension.name %></td>
+        <td><%= item.quantity %></td>
+        <td><%= item.currency_price %></td>
+        <td><%= item.tw_price %></td>
+        <td><%= item.duty %></td>
+        <td><%= item.shipping_fee %></td>
+        <td><%= item.service_fee %></td>
+        <td><%= item.tw_price + item.duty + item.shipping_fee + item.service_fee %></td>
+        <td><%= (item.tw_price + item.duty + item.shipping_fee + item.service_fee) *  item.quantity %></td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <td><%=  %></td>
+    </tr>
+  </tbody>
+</table>

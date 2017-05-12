@@ -46,6 +46,10 @@ class Admin::PurchasesController < AdminController
     end
   end
 
+  def show
+    @purchase = Purchase.find(params[:id])
+    @purchase_items = @purchase.purchase_items
+  end
 
   private
   def purchase_params

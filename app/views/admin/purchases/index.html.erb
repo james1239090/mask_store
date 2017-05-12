@@ -7,11 +7,11 @@
     <th>Action</th>
   </thead>
   <tbody>
-    <% @purchases.each do |purchases| %>
+    <% @purchases.each do |purchase| %>
       <tr>
-        <td><%= purchases.id %></td>
-        <td><%= purchases.created_at %></td>
-        <td><%= link_to("Edit", edit_admin_purchase_path(purchases)) %></td>
+        <td><%= purchase.id %></td>
+        <td><%= link_to(purchase.created_at,admin_purchase_path(purchase)) %></td>
+        <td><%= link_to("Edit", edit_admin_purchase_path(purchase)) %></td>
       </tr>
     <% end %>
   </tbody>
