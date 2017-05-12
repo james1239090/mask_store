@@ -1,11 +1,11 @@
 <div class="row nested-fields form-group">
-  <div class="col-md-3">
+  <div class="col-md-2">
     <%= f.association :product, label: false, input_html:{class:"select_product"} %>
   </div>
   <div class="col-md-2">
     <%= f.association :color,collection: ProductOption.by_color(f.object.product_id),label: false, input_html:{class:"select_color"} %>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-1">
     <%= f.association :dimension,collection: ProductOption.by_dimension(f.object.product_id),label: false, input_html:{class:"select_dimension"} %>
   </div>
   <div class="col-md-2">
@@ -13,6 +13,9 @@
   </div>
   <div class="col-md-2">
     <%= f.input :currency_price ,label: false %>
+  </div>
+   <div class="col-md-2">
+  <%= f.input :tw_price, label:false %>
   </div>
   <div class="col-md-1"></div>
   <%= link_to_remove_association f, class:"btn" do %>

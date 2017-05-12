@@ -10,8 +10,12 @@ class Admin::PurchasesController < AdminController
 
   def create
     @purchase = Purchase.new(purchase_params)
-
     if @purchase.save
+      @purchase.total_currency!
+      @purchase.calculate_currency_rate!
+      @purchase.calculate_tw_total_shipping_fee!
+      @purchase.calculate_each_tw_price!
+      @purchase.calculate_each_fee!
       redirect_to admin_purchases_path
     else
       puts "-------------"
@@ -29,6 +33,11 @@ class Admin::PurchasesController < AdminController
     @purchase = Purchase.find(params[:id])
 
     if @purchase.update(purchase_params)
+      @purchase.total_currency!
+      @purchase.calculate_currency_rate!
+      @purchase.calculate_tw_total_shipping_fee!
+      @purchase.calculate_each_tw_price!
+      @purchase.calculate_each_fee!
       redirect_to admin_purchases_path
     else
       puts "-------------"
@@ -40,7 +49,7 @@ class Admin::PurchasesController < AdminController
 
   private
   def purchase_params
-    params.require(:purchase).permit(:total_currency_price, :total_tw_price, :total_duty, :total_shipping_fee,
+    params.require(:purchase).permit(:total_currency_price, :total_tw_price, :total_duty, :total_currency_shipping_fee,
                                      :total_service_fee, :purchase_date, :delivery_date,
                                      purchase_items_attributes:[:id,:product_id,:color_id,:dimension_id,:quantity,:currency_price,:tw_price,
                                                                 :duty,:shipping_fee,:service_fee,:_destroy])
