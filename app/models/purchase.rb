@@ -9,7 +9,7 @@ class Purchase < ApplicationRecord
     purchase_items.each do |purchase_item|
       sum = sum + (purchase_item.currency_price * purchase_item.quantity)
     end
-    self.total_currency_price = sum
+    self.total_currency_price = sum + self.total_currency_shipping_fee
     self.save
   end
 
