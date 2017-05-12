@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511082952) do
+ActiveRecord::Schema.define(version: 20170512110644) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -114,28 +114,28 @@ ActiveRecord::Schema.define(version: 20170511082952) do
     t.integer  "dimension_id"
     t.integer  "color_id"
     t.integer  "quantity"
-    t.float    "currency_price"
-    t.float    "tw_price"
-    t.float    "duty"
-    t.float    "shipping_fee"
-    t.float    "service_fee"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.decimal  "currency_price", precision: 8, scale: 2
+    t.decimal  "tw_price",       precision: 8, scale: 2
+    t.decimal  "duty",           precision: 8, scale: 2
+    t.decimal  "shipping_fee",   precision: 8, scale: 2
+    t.decimal  "service_fee",    precision: 8, scale: 2
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "product_id"
   end
 
   create_table "purchases", force: :cascade do |t|
-    t.float    "total_currency_price"
-    t.float    "total_tw_price"
-    t.float    "total_duty"
-    t.float    "total_service_fee"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.decimal  "total_currency_price",        precision: 8, scale: 2
+    t.decimal  "total_tw_price",              precision: 8, scale: 2
+    t.decimal  "total_duty",                  precision: 8, scale: 2
+    t.decimal  "total_service_fee",           precision: 8, scale: 2
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.datetime "purchase_date"
     t.datetime "delivery_date"
-    t.float    "currency_rate"
-    t.float    "total_tw_shipping_fee"
-    t.float    "total_currency_shipping_fee"
+    t.decimal  "currency_rate",               precision: 8, scale: 4
+    t.decimal  "total_tw_shipping_fee",       precision: 8, scale: 2
+    t.decimal  "total_currency_shipping_fee", precision: 8, scale: 2
   end
 
   create_table "users", force: :cascade do |t|
