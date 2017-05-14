@@ -11,11 +11,11 @@
     </tr>
     <tr>
       <td colspan="10">total_duty</td>
-      <td><%= @purchase.total_duty %></td>
+      <td><%= @purchase.total_tw_duty %></td>
     </tr>
     <tr>
       <td colspan="10">total_service_fee</td>
-      <td><%= @purchase.total_service_fee %></td>
+      <td><%= @purchase.total_tw_service_fee %></td>
     </tr>
     <tr>
       <td colspan="10">purchase_date</td>
@@ -67,8 +67,8 @@
         <td><%= item.duty %></td>
         <td><%= item.shipping_fee %></td>
         <td><%= item.service_fee %></td>
-        <td><%= item.tw_price + item.duty + item.shipping_fee + item.service_fee %></td>
-        <td><%= (item.tw_price + item.duty + item.shipping_fee + item.service_fee) *  item.quantity %></td>
+        <td><%= item.sub_total %></td>
+        <td><%= item.total %></td>
       </tr>
     <% end %>
 

@@ -53,8 +53,8 @@ class Admin::PurchasesController < AdminController
 
   private
   def purchase_params
-    params.require(:purchase).permit(:total_currency_price, :total_tw_price, :total_duty, :total_currency_shipping_fee,
-                                     :total_service_fee, :purchase_date, :delivery_date,
+    params.require(:purchase).permit(:total_currency_price, :total_tw_price, :total_tw_duty, :total_currency_shipping_fee,
+                                     :total_tw_service_fee, :purchase_date, :delivery_date,
                                      purchase_items_attributes:[:id,:product_id,:color_id,:dimension_id,:quantity,:currency_price,:tw_price,
                                                                 :duty,:shipping_fee,:service_fee,:_destroy])
   end

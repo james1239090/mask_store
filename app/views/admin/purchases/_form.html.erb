@@ -15,9 +15,9 @@
       <%= render 'purchase_item_fields', f: purchase_item %>
     <% end %>
     <%= f.input :total_tw_price %>
-    <%= f.input :total_duty %>
+    <%= f.input :total_tw_duty %>
     <%= f.input :total_currency_shipping_fee %>
-    <%= f.input :total_service_fee %>
+    <%= f.input :total_tw_service_fee %>
     <%= f.input :purchase_date,as: :date, html5: true %>
     <%= f.input :delivery_date,as: :date, html5: true %>
     <%= f.submit "Submit", class:"btn btn-info pull-right",data:{ disable_with: "Submitting..." } %>
