@@ -3,6 +3,7 @@ class Purchase < ApplicationRecord
   has_many :items, through: :purchase_items, source: :product
 
   accepts_nested_attributes_for :purchase_items, reject_if: :all_blank, :allow_destroy => true
+  monetize :total_tw_price, :as=> "total_tw_cents" , :with_currency => :twd
 
   def total_currency!
     sum = 0
@@ -32,12 +33,28 @@ class Purchase < ApplicationRecord
   end
 
   def calculate_each_fee!
+    total_currency = self.total_currency_price - self.total_currency_shipping_fee
+    duty = self.total_tw_duty
+    tw_shipping = self.total_tw_shipping_fee
+    service_fee = self.total_tw_service_fee
+
     purchase_items.each do |purchase_item|
-      purchase_item.duty = (purchase_item.currency_price * self.total_duty) / self.total_currency_price
-      purchase_item.shipping_fee = (purchase_item.currency_price * self.total_tw_shipping_fee) / self.total_currency_price
-      purchase_item.service_fee = purchase_item.currency_price * self.total_service_fee / self.total_currency_price
+      purchase_item.duty = (purchase_item.currency_price * duty) / total_currency
+      purchase_item.shipping_fee = (purchase_item.currency_price * tw_shipping) / total_currency
+      purchase_item.service_fee = purchase_item.currency_price *  service_fee / total_currency
+      purchase_item.sub_total = (purchase_item.tw_price + purchase_item.duty +  purchase_item.shipping_fee + purchase_item.service_fee).to_i
+      purchase_item.total = (purchase_item.sub_total * purchase_item.quantity).to_i
       purchase_item.save
     end
+  end
+
+  def caculate_round_diff!
+    total = 0
+    purchase_items.each do |purchase_item|
+      total = total +  purchase_item.total
+    end
+    self.round_diff_money = self.total_tw_price + self.total_tw_duty + self.total_tw_service_fee - total
+    self.save
   end
 
 end

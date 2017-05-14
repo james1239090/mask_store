@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514024620) do
+ActiveRecord::Schema.define(version: 20170514030714) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20170514024620) do
     t.decimal  "currency_rate",               precision: 8, scale: 4
     t.decimal  "total_tw_shipping_fee",       precision: 8, scale: 2
     t.decimal  "total_currency_shipping_fee", precision: 8, scale: 2
+    t.integer  "round_diff_money"
   end
 
   create_table "users", force: :cascade do |t|

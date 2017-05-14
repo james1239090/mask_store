@@ -24,7 +24,6 @@
     <tr>
       <td colspan="10">delivery_date</td>
       <td><%= @purchase.delivery_date %></td>
-
     </tr>
     <tr>
       <td colspan="10">currency_rate</td>
@@ -37,6 +36,10 @@
     <tr>
       <td colspan="10">total_currency_shipping_fee</td>
       <td><%= @purchase.total_currency_shipping_fee %></td>
+    </tr>
+    <tr>
+      <td colspan="10">round_diff_money</td>
+      <td><%= @purchase.round_diff_money %></td>
     </tr>
   </tbody>
 </table>
@@ -71,7 +74,6 @@
         <td><%= item.total %></td>
       </tr>
     <% end %>
-
     <tr>
       <td><%=  %></td>
     </tr>

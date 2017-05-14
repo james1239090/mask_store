@@ -16,6 +16,7 @@ class Admin::PurchasesController < AdminController
       @purchase.calculate_tw_total_shipping_fee!
       @purchase.calculate_each_tw_price!
       @purchase.calculate_each_fee!
+      @purchase.caculate_round_diff!
       redirect_to admin_purchases_path
     else
       puts "-------------"
@@ -38,6 +39,7 @@ class Admin::PurchasesController < AdminController
       @purchase.calculate_tw_total_shipping_fee!
       @purchase.calculate_each_tw_price!
       @purchase.calculate_each_fee!
+      @purchase.caculate_round_diff!
       redirect_to admin_purchases_path
     else
       puts "-------------"

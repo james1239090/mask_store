@@ -44,7 +44,6 @@ MoneyRails.configure do |config|
   #                          }
 
   # Register a custom currency
-  #
   # Example:
   # config.register_currency = {
   #   :priority            => 1,
