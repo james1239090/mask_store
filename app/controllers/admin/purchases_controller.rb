@@ -1,5 +1,5 @@
 class Admin::PurchasesController < AdminController
-
+  before_action :find_purchase, only: [:edit,:update,:destroy,:show]
   def index
     @purchases = Purchase.all
   end
@@ -27,12 +27,10 @@ class Admin::PurchasesController < AdminController
   end
 
   def edit
-    @purchase = Purchase.find(params[:id])
+
   end
 
   def update
-    @purchase = Purchase.find(params[:id])
-
     if @purchase.update(purchase_params)
       @purchase.total_currency!
       @purchase.calculate_currency_rate!
@@ -49,8 +47,12 @@ class Admin::PurchasesController < AdminController
   end
 
   def show
-    @purchase = Purchase.find(params[:id])
     @purchase_items = @purchase.purchase_items
+  end
+
+  def destroy
+    @purchase.destroy
+    redirect_to admin_purchases_path
   end
 
   private
@@ -59,5 +61,9 @@ class Admin::PurchasesController < AdminController
                                      :total_tw_service_fee, :purchase_date, :delivery_date,
                                      purchase_items_attributes:[:id,:product_id,:color_id,:dimension_id,:quantity,:currency_price,:tw_price,
                                                                 :duty,:shipping_fee,:service_fee,:_destroy])
+  end
+
+  def find_purchase
+    @purchase = Purchase.find(params[:id])
   end
 end

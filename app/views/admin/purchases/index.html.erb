@@ -12,6 +12,7 @@
         <td><%= purchase.id %></td>
         <td><%= link_to(purchase.created_at,admin_purchase_path(purchase)) %></td>
         <td><%= link_to("Edit", edit_admin_purchase_path(purchase)) %></td>
+        <td><%= link_to("Delete", admin_purchase_path(purchase), method: :delete, data:{confirm: 'Are you sure ?'}) %></td>
       </tr>
     <% end %>
   </tbody>

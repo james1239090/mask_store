@@ -1,6 +1,6 @@
 class Admin::OrdersController < AdminController
 
-  before_action :find_order, on: [:ship,:shipped,:cancel,:return]
+  before_action :find_order, only: [:ship,:shipped,:cancel,:return]
 
   def index
     @orders = Order.order("id DESC")
