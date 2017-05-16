@@ -1,0 +1,22 @@
+<h2>銷售平台(SalePlatform)</h2>
+<br>
+<%= link_to("New SalePlatform", new_admin_sale_platform_path, class:"btn btn-info pull-right") %>
+<table class="table">
+  <thead>
+    <th>#</th>
+    <th>Name</th>
+    <th>Service Rate (%)</th>
+    <th colspan="2">Action</th>
+  </thead>
+  <tbody>
+    <% @sale_platforms.each do |sale_platform| %>
+      <tr>
+        <td><%= sale_platform.id %></td>
+        <td><%= sale_platform.name %></td>
+        <td><%= sale_platform.service_rate %></td>
+        <td><%= link_to("Edit", edit_admin_sale_platform_path(sale_platform)) %></td>
+        <td><%= link_to("Delete", admin_sale_platform_path(sale_platform), method: :delete, data: {confirm: 'Are you sure ?'}) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

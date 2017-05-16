@@ -1,0 +1,6 @@
+<%= simple_form_for [:admin, @sale_platform] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :service_rate, label: "Service Rate (%)" %>
+
+  <%= f.submit "Submit", class:"btn btn-info pull-right",data:{ disable_with: "Submitting..." } %>
+<% end %>
