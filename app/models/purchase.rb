@@ -42,8 +42,8 @@ class Purchase < ApplicationRecord
       purchase_item.duty = (purchase_item.currency_price * duty) / total_currency
       purchase_item.shipping_fee = (purchase_item.currency_price * tw_shipping) / total_currency
       purchase_item.service_fee = purchase_item.currency_price *  service_fee / total_currency
-      purchase_item.sub_total = (purchase_item.tw_price + purchase_item.duty +  purchase_item.shipping_fee + purchase_item.service_fee).to_i
-      purchase_item.total = (purchase_item.sub_total * purchase_item.quantity).to_i
+      purchase_item.sub_total = purchase_item.tw_price + purchase_item.duty +  purchase_item.shipping_fee + purchase_item.service_fee
+      purchase_item.total = purchase_item.sub_total * purchase_item.quantity
       purchase_item.save
     end
   end
