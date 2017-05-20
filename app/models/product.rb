@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   has_many :product_options, dependent: :destroy
   has_many :dimensions, :through => :product_options, source: :dimension
   has_many :colors, :through => :product_options, source: :color
+  has_many :inventroys
 
   accepts_nested_attributes_for :photo, :allow_destroy => true
   accepts_nested_attributes_for :product_options, :allow_destroy => true,:reject_if => :all_blank
