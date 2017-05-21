@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class InventroyTransactionTest < ActiveSupport::TestCase
+class InventoryTransactionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520073416) do
+ActiveRecord::Schema.define(version: 20170521090357) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -53,8 +53,18 @@ ActiveRecord::Schema.define(version: 20170520073416) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "inventroy_transactions", force: :cascade do |t|
-    t.integer  "inventroy_id"
+  create_table "inventories", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "color_id"
+    t.integer  "dimension_id"
+    t.decimal  "cost",         precision: 8, scale: 2
+    t.integer  "quantity"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  create_table "inventory_transactions", force: :cascade do |t|
+    t.integer  "inventory_id"
     t.decimal  "original_cost",     precision: 8, scale: 2
     t.integer  "original_quantity"
     t.decimal  "change_cost",       precision: 8, scale: 2
@@ -64,16 +74,6 @@ ActiveRecord::Schema.define(version: 20170520073416) do
     t.integer  "changed_type"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
-  end
-
-  create_table "inventroys", force: :cascade do |t|
-    t.integer  "product_id"
-    t.integer  "color_id"
-    t.integer  "dimension_id"
-    t.decimal  "cost",         precision: 8, scale: 2
-    t.integer  "quantity"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
   end
 
   create_table "order_infos", force: :cascade do |t|
@@ -126,10 +126,10 @@ ActiveRecord::Schema.define(version: 20170520073416) do
   create_table "products", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
+    t.integer  "quantity"
     t.integer  "price"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "quantity"
   end
 
   create_table "purchase_items", force: :cascade do |t|
