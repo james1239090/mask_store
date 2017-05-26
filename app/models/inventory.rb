@@ -12,13 +12,12 @@ class Inventory < ApplicationRecord
     inventory.color_id = purchase_item.color_id
     inventory.cost = purchase_item.sub_total
     inventory.quantity = purchase_item.quantity
-
+    inventory.save
     inventory.inventory_transactions.new_transaction_from_purchase_item(
       purchase_item.sub_total,purchase_item.quantity,
       purchase_item.sub_total,purchase_item.quantity,
       purchase_item.sub_total,purchase_item.quantity,
       0,purchase_item.id)
-    inventory.save
   end
 
   def calculate_new_average_price(purchase_item)
