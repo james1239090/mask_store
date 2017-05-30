@@ -7,7 +7,7 @@ class InventoryTransaction < ApplicationRecord
     sale: 1,
   }
 
-  def self.new_transaction_from_purchase_item(original_cost, original_quantity, change_cost, change_quantity, final_cost, final_quantity, change_type, source_id)
+  def self.new_transaction_from_item(original_cost, original_quantity, change_cost, change_quantity, final_cost, final_quantity, change_type, source_id)
     transaction = self.new
     transaction.original_cost = original_cost
     transaction.original_quantity = original_quantity

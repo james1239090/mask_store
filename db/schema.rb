@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526035855) do
+ActiveRecord::Schema.define(version: 20170530085004) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -170,16 +170,18 @@ ActiveRecord::Schema.define(version: 20170526035855) do
     t.integer  "product_id"
     t.integer  "dimension_id"
     t.integer  "color_id"
-    t.integer  "cost"
+    t.decimal  "cost"
     t.integer  "quantity"
     t.integer  "sale_price"
-    t.integer  "shipping_fee"
-    t.integer  "service_fee"
-    t.integer  "credit_fee"
-    t.integer  "profit"
-    t.integer  "profit_rate"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "shipping_fee",   default: 0
+    t.integer  "service_fee",    default: 0
+    t.integer  "credit_fee",     default: 0
+    t.decimal  "profit"
+    t.decimal  "profit_rate"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.decimal  "cost_sub_total"
+    t.integer  "sale_sub_total"
   end
 
   create_table "sale_platforms", force: :cascade do |t|
@@ -197,14 +199,16 @@ ActiveRecord::Schema.define(version: 20170526035855) do
     t.integer  "sale_platform_id"
     t.integer  "ship_type_id"
     t.integer  "total_cost"
-    t.integer  "shipping_fee"
+    t.integer  "total_shipping_fee"
     t.integer  "total_service_fee"
     t.integer  "total_profit"
     t.decimal  "total_profit_rate"
     t.datetime "sale_date"
     t.datetime "shipping_date"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "total_sale"
+    t.string   "shipping_number"
   end
 
   create_table "users", force: :cascade do |t|

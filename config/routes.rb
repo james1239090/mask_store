@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
     resources :product_options, only: :index
     resources :purchases
+    resources :sales
     resources :sale_platforms
     resources :inventories do
       resources :inventory_transactions

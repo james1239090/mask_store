@@ -1,0 +1,25 @@
+<%= simple_form_for [:admin, @sale]  do |f| %>
+  <label>Sale Item</label>
+  <div class="col-md-offset-1">
+    <div class="row">
+      <%= link_to_add_association f, :sale_items,
+                  'data-association-insertion-method' => 'after',
+          'data-association-insertion-node' => '.nested-fields:last',
+        class:"btn btn-success btn-xs pull-right" do %>
+        <i class="fa fa-plus"></i>Add Sale Item
+        <% end %>
+    </div>
+    <br>
+    <%= render 'sale_item_header' %>
+    <%= f.simple_fields_for :sale_items do |sale_item| %>
+      <%= render 'sale_item_fields', f: sale_item %>
+    <% end %>
+    <%= f.input :order_number %>
+    <%= f.input :address %>
+    <%= f.input :sale_platform_id, collection: SalePlatform.all, value_method: :id, label_method: :name%>
+    <%= f.input :ship_type_id, as: :select ,collection: Sale.ship_type_ids.map { |k, v| [k.humanize, v] } %>
+    <%= f.input :shipping_number %>
+    <%= f.input :sale_date,as: :date, html5: true %>
+    <%= f.input :shipping_date,as: :date, html5: true %>
+    <%= f.submit "Submit", class:"btn btn-info pull-right",data:{ disable_with: "Submitting..." } %>
+  <% end %>

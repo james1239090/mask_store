@@ -1,0 +1,19 @@
+<h2>銷貨</h2>
+<%= link_to("新增銷貨單", new_admin_sale_path, class:"btn btn-info pull-right") %>
+<table class="table">
+  <thead>
+    <th>#</th>
+    <th>Date</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <% @sales.each do |sale| %>
+      <tr>
+        <td><%= sale.id %></td>
+        <td><%= link_to(sale.created_at, admin_sale_path(sale)) %></td>
+        <td><%= link_to("Edit", edit_admin_sale_path(sale)) %></td>
+        <td><%= link_to("Delete", admin_sale_path(sale), method: :delete, data:{confirm: 'Are you sure ?'}) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
