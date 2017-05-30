@@ -18,6 +18,7 @@
 //= require dropzone
 //= require cocoon
 //= require select2
+//= require 'taiwan_city/jquery.taiwan_city'
 //= require_tree .
 
 $(function() {

@@ -51,6 +51,8 @@ gem 'dropzonejs-rails'
 gem 'cocoon'
 gem 'select2-rails'
 gem 'money-rails', '~>1'
+gem 'taiwan_city'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

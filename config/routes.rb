@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root "products#index"
+  mount TaiwanCity::Engine => '/taiwan_city'
 
   namespace :admin do
     resources :products do
