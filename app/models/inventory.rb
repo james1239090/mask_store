@@ -42,10 +42,7 @@ class Inventory < ApplicationRecord
     inventory_transaction = purchase_item.inventory_transaction
 
     original_cost = inventory_transaction.original_cost
-
     original_quantity = inventory_transaction.original_quantity
-    puts "-------------original_quantity"
-    puts original_quantity
     change_cost = purchase_item.sub_total
     change_quantity = purchase_item.quantity
     final_quantity = original_quantity+change_quantity

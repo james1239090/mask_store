@@ -1,0 +1,21 @@
+<h2>Inventory</h2>
+<table class="table">
+  <thead>
+    <th>#</th>
+    <th>Product</th>
+    <th>Cost</th>
+    <th>Quantity</th>
+    <th>Update_date</th>
+  </thead>
+  <tbody>
+    <% @inventories.each do |inventory| %>
+      <tr>
+        <td><%= inventory.id %></td>
+        <td><%= inventory.product.title %></td>
+        <td><%= inventory.cost %></td>
+        <td><%= inventory.quantity %></td>
+        <td><%= link_to(inventory.updated_at, admin_inventory_path(inventory)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

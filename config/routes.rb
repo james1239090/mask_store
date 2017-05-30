@@ -23,7 +23,9 @@ Rails.application.routes.draw do
     resources :product_options, only: :index
     resources :purchases
     resources :sale_platforms
-
+    resources :inventories do
+      resources :inventory_transactions
+    end
   end
 
   namespace :account do

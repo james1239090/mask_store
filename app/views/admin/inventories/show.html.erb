@@ -1,0 +1,32 @@
+<H2>Inventory Information</H2>
+<%= @inventory.product.title %> <br>
+<%= @inventory.cost %><br>
+<%= @inventory.quantity %><br>
+<%= @inventory.updated_at %><br>
+<h2>Inventory Transaction Detail</h2>
+<table class="table">
+  <thead>
+    <th>#</th>
+    <th>original_cost</th>
+    <th>original_qyt</th>
+    <th>change_cost</th>
+    <th>change_qty</th>
+    <th>final_cost</th>
+    <th>final_qty</th>
+    <th>updated_at</th>
+  </thead>
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.id %></td>
+        <td><%= transaction.original_cost %></td>
+        <td><%= transaction.original_quantity %></td>
+        <td><%= transaction.change_cost %></td>
+        <td><%= transaction.change_quantity %></td>
+        <td><%= transaction.final_cost %></td>
+        <td><%= transaction.final_quantity %></td>
+        <td><%= transaction.updated_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
