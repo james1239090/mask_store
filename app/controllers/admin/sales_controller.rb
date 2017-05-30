@@ -30,7 +30,10 @@ class Admin::SalesController < AdminController
   end
 
   def destroy
+    @sale = Sale.find(params[:id])
+    @sale.destroy
 
+    redirect_to admin_sales_path
   end
 
 
