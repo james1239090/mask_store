@@ -79,4 +79,26 @@ class Inventory < ApplicationRecord
       final_cost,final_quantity,
     1, sale_item.id)
   end
+
+  def update_sale_from_item(sale_item)
+    inventory_transaction = sale_item.inventory_transaction
+
+    original_cost = inventory_transaction.original_cost
+    original_quantity = inventory_transaction.original_quantity
+    change_cost = inventory_transaction.change_cost
+    change_quantity = sale_item.quantity
+    final_quantity = original_quantity - change_quantity
+    final_cost = inventory_transaction.final_cost
+
+    inventory_transaction.update(original_cost: original_cost,
+                                 original_quantity: original_quantity,
+                                 change_cost: change_cost,
+                                 change_quantity: change_quantity,
+                                 final_cost: final_cost,
+                                 final_quantity: final_quantity
+                                 )
+    self.cost = final_cost
+    self.quantity = final_quantity
+    self.save
+  end
 end

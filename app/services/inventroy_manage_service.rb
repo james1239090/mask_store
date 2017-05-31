@@ -30,4 +30,11 @@ class InventroyManageService
     end
   end
 
+  def update_sale!
+    @source.sale_items.each do |sale_item|
+      @inventory = Inventory.getInventory(sale_item.product_id, sale_item.dimension_id, sale_item.color_id).first
+      @inventory.update_sale_from_item(sale_item)
+    end
+  end
+
 end

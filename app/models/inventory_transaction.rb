@@ -1,6 +1,8 @@
 class InventoryTransaction < ApplicationRecord
   belongs_to :inventory
   belongs_to :purchase_item,-> { joins(:inventory_transaction).where("inventory_transactions.changed_type = ?", 0)}, :foreign_key => 'source_id'
+  belongs_to :sale_item,-> { joins(:inventory_transaction).where("inventory_transactions.changed_type = ?", 1)}, :foreign_key => 'source_id'
+
   before_destroy :roll_back_original_cost_and_quantity_to_inventory
   enum changed_type: {
     purchase: 0,
