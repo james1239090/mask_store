@@ -4,7 +4,8 @@ class SaleItem < ApplicationRecord
   belongs_to :color
   belongs_to :dimension
   has_one :inventory_transaction,-> { where("changed_type=?", 1)},:foreign_key => 'source_id', dependent: :destroy
-  validates :quantity, numericality: {less_than_or_equal_to: :getInventoryQty}
+  validates :quantity, numericality: {less_than_or_equal_to: :getInventoryQty}, presence: true
+  validates :product_id, :dimension_id,:color_id, :sale_price, presence: true
 
   private
   def getInventoryQty
