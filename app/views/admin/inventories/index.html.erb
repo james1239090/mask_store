@@ -3,6 +3,8 @@
   <thead>
     <th>#</th>
     <th>Product</th>
+    <th>Color</th>
+    <th>Size</th>
     <th>Cost</th>
     <th>Quantity</th>
     <th>Update_date</th>
@@ -12,6 +14,8 @@
       <tr>
         <td><%= inventory.id %></td>
         <td><%= inventory.product.title %></td>
+        <td><%= inventory.color.name %></td>
+        <td><%= inventory.dimension.name %></td>
         <td><%= inventory.cost %></td>
         <td><%= inventory.quantity %></td>
         <td><%= link_to(inventory.updated_at, admin_inventory_path(inventory)) %></td>

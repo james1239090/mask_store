@@ -43,6 +43,9 @@ class Admin::SalesController < AdminController
     redirect_to admin_sales_path
   end
 
+  def show
+    @sale_items = @sale.sale_items
+  end
 
   private
   def find_sale
