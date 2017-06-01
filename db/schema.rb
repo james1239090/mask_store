@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530085004) do
+ActiveRecord::Schema.define(version: 20170601085747) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -193,8 +193,8 @@ ActiveRecord::Schema.define(version: 20170530085004) do
 
   create_table "sales", force: :cascade do |t|
     t.string   "order_number"
-    t.integer  "city_id"
-    t.integer  "district_id"
+    t.string   "city_id"
+    t.string   "district_id"
     t.string   "address"
     t.integer  "sale_platform_id"
     t.integer  "ship_type_id"

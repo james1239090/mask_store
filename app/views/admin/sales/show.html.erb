@@ -9,7 +9,9 @@ Total Service Fee: <%= @sale.total_service_fee %><br>
 Total Profit: <%= @sale.total_profit %><br>
 Total Profit Rate: <%= (@sale.total_profit_rate * 100).round(2).to_s + "%" %><br>
 Total Price: <%= @sale.total_sale %><br>
-Ship Type: <%= @sale.ship_type_id %>
+Ship Type: <%= @sale.ship_type_id %><br>
+City : <%= TaiwanCity.get(@sale.city_id) %><br>
+District : <%= TaiwanCity.get(@sale.district_id) %><br>
 <table class="table">
   <thead>
     <th>Product</th>
