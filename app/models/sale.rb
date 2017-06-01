@@ -2,13 +2,13 @@ class Sale < ApplicationRecord
   belongs_to :sale_platform
   has_many :sale_items, dependent: :destroy
   accepts_nested_attributes_for :sale_items, reject_if: :all_blank, :allow_destroy => true
-  validates :sale_platform_id, :ship_type_id,:city_id, :district_id, :order_number, presence: true
+  validates :sale_platform_id,:city_id, :district_id, :ship_type_id,:order_number, presence: true
 
-  enum ship_type_id: {
-    "7-11": "0",
-    "familyport": "1",
-    "宅配": "2",
-    "郵寄": "3"
+  enum ship_type_id:{
+    "7-11": 0,
+    "familyport": 1,
+    "宅配": 2,
+    "郵寄": 3
   }
 
   def calculate_each_item_fee!

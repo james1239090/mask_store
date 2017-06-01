@@ -15,9 +15,13 @@
       <%= render 'sale_item_fields', f: sale_item %>
     <% end %>
     <%= f.input :order_number %>
+    <div class="city-group">
+      <%= f.input :city_id, collection: TaiwanCity.list, input_html: { class: "city-select" } %>
+      <%= f.input :district_id, as: :select, input_html: { class: "city-select" } %>
+    </div>
     <%= f.input :address %>
     <%= f.input :sale_platform_id, collection: SalePlatform.all, value_method: :id, label_method: :name%>
-    <%= f.input :ship_type_id, as: :select ,collection: Sale.ship_type_ids.map { |k, v| [k.humanize, v] } %>
+    <%= f.input :ship_type_id, collection: Sale.ship_type_ids.keys %>
     <%= f.input :shipping_number %>
     <%= f.input :sale_date,as: :date, html5: true %>
     <%= f.input :shipping_date,as: :date, html5: true %>
