@@ -12,5 +12,12 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :dimensions, :allow_destroy => true
   accepts_nested_attributes_for :colors, :allow_destroy => true
 
-  scope :by_name,  -> (name) { where "title like ?", "%#{name}%"}
+  scope :q_name,  -> (name) { where "title like ?", "%#{name}%"}
+  scope :get_inventory,-> (qty) {
+    joins(:inventories).where("inventories.quantity > ?",qty).group(:product_id)
+  }
+  scope :q_name_with_inven, -> (name) {
+    joins(:inventories)
+    .where("title like ? and inventories.quantity > 0","%#{name}%").group(:product_id)
+  }
 end

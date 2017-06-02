@@ -1,4 +1,5 @@
 class Inventory < ApplicationRecord
+  include Filterable
   belongs_to :product
   belongs_to :dimension
   belongs_to :color
@@ -8,6 +9,23 @@ class Inventory < ApplicationRecord
     where("product_id = ? and color_id = ? and dimension_id = ?", product, color, dimension)
   }
 
+  scope :by_product_name,-> (name){
+    joins(:product)
+    .select("products.title as title, products.id as id")
+    .where("products.title like ?", "%#{name}%")
+  }
+
+  scope :p_id, -> (id) {
+    joins(:color)
+    .select("color_id as id, colors.name as text")
+    .where( :product_id => id )
+  }
+  scope :getFromProAndCol,-> (p_id,c_id) {
+    joins(:dimension)
+    .select("dimension_id as id, dimensions.name as text")
+    .where("product_id = ? and color_id = ?",p_id,c_id)
+  }
+  scope :g_id, -> (id) { group(id)}
 
   def self.add_inventory_from_purchase_item(purchase_item)
     inventory = self.new

@@ -17,7 +17,7 @@ class Admin::ProductsController < AdminController
   end
 
   def index
-    @products = Product.filter(params.slice(:by_name))
+    @products = Product.filter(params.slice(:q_name,:q_name_with_inven,:get_inventory))
     respond_to do |format|
       format.html
       format.json do

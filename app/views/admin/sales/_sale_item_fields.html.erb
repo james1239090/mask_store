@@ -1,13 +1,13 @@
 <div class="row nested-fields form-group">
   <div class="row">
     <div class="col-md-6">
-      <%= f.association :product, label: false, input_html:{class:"select_product"} %>
+      <%= f.association :product, collention: Product.get_inventory(0) ,label: false, input_html:{class:"select_product", data: {selectfrom: "sale"}} %>
     </div>
     <div class="col-md-3">
-      <%= f.association :color, collection: ProductOption.by_color(f.object.product_id),label: false, input_html: { class: "select_color" } %>
+      <%= f.association :color, label: false, input_html: { class: "select_color",data: {selectfrom: "sale"} } %>
     </div>
     <div class="col-md-3">
-      <%= f.association :dimension, collection: ProductOption.by_dimension(f.object.product_id), label: false, input_html: { class: "select_dimension" } %>
+      <%= f.association :dimension, label: false, input_html: { class: "select_dimension",data: {selectfrom: "sale"} } %>
     </div>
       </div>
   <div class="row">
