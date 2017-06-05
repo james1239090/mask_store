@@ -15,17 +15,18 @@ class Inventory < ApplicationRecord
     .where("products.title like ?", "%#{name}%")
   }
 
-  scope :p_id, -> (id) {
+  scope :getColorOption, -> (product_id) {
     joins(:color)
     .select("color_id as id, colors.name as text")
-    .where( :product_id => id )
+    .where( :product_id => product_id )
+    .group("colors.name","product_options.color_id")
   }
-  scope :getFromProAndCol,-> (p_id,c_id) {
+  scope :getDimensionOption,-> (product_id, color_id) {
     joins(:dimension)
     .select("dimension_id as id, dimensions.name as text")
-    .where("product_id = ? and color_id = ?",p_id,c_id)
+    .where("product_id = ? and color_id = ?", product_id, color_id)
+    .group("dimensions.name","product_options.dimension_id")
   }
-  scope :g_id, -> (id) { group(id)}
 
   def self.add_inventory_from_purchase_item(purchase_item)
     inventory = self.new

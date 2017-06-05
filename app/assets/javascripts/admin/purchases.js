@@ -94,8 +94,7 @@ function addListenerOnSelectProduct(item) {
 			url: url,
 			dataType: "JSON",
 			data: {
-				g_id: "color_id",
-				p_id: product_id
+				getColorOption: product_id
 			},
 			success: function(data) {
 				removeOption($selct_color);
@@ -127,8 +126,7 @@ function addListenerOnSelectColor(item) {
 			url: url,
 			dataType: "JSON",
 			data: {
-				g_id: "dimension_id",
-				getFromProAndCol: [$select_product.val(), color_id]
+				getDimensionOption: [$select_product.val(), color_id]
 			},
 			success: function(data) {
 				removeOption($selct_dimension);
