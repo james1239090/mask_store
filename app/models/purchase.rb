@@ -1,7 +1,7 @@
 class Purchase < ApplicationRecord
   has_many :purchase_items, dependent: :destroy
   has_many :items, through: :purchase_items, source: :product
-  validates :total_tw_price, :total_tw_duty ,:total_tw_service_fee, :total_currency_shipping_fee, presence: true
+  validates :total_tw_price, :total_tw_duty ,:total_tw_service_fee, :total_currency_shipping_fee, :purchase_items, presence: true
 
   accepts_nested_attributes_for :purchase_items, reject_if: :all_blank, :allow_destroy => true
   monetize :total_tw_price, :as=> "total_tw_cents" , :with_currency => :twd

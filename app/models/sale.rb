@@ -2,7 +2,7 @@ class Sale < ApplicationRecord
   belongs_to :sale_platform
   has_many :sale_items, dependent: :destroy
   accepts_nested_attributes_for :sale_items, reject_if: :all_blank, :allow_destroy => true
-  validates :sale_platform_id,:city_id, :district_id, :ship_type_id,:order_number, presence: true
+  validates :sale_platform_id,:city_id, :district_id, :ship_type_id,:order_number, :sale_items,presence: true
 
   enum ship_type_id:{
     "7-11": 0,
