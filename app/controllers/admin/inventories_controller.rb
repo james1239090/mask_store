@@ -1,6 +1,6 @@
 class Admin::InventoriesController < AdminController
   def index
-    @inventories = Inventory.filter(params.slice(:by_product_name,:p_id, :c_id,:getFromProAndCol,:g_id))
+    @inventories = Inventory.filter(params.slice(:by_product_name,:getColorOption,:getDimensionOption))
     respond_to do |format|
       format.html
       format.json do
