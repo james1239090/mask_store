@@ -141,8 +141,9 @@ function addListenerOnSelectColor(item) {
 		});
 	});
 }
-$(function() {
-	$('form').on('cocoon:after-insert', function(e, addItem) {
+
+$(document).on('ready', function() {
+	$(document).on('cocoon:after-insert', 'form', function(e, addItem) {
 		initDefaultSelectProduct(addItem);
 		initDefaultSelectColorAndDimension(addItem);
 		addListenerOnSelectProduct(addItem);
