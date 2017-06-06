@@ -14,10 +14,13 @@ class Product < ApplicationRecord
 
   scope :q_name,  -> (name) { where "title like ?", "%#{name}%"}
   scope :get_inventory,-> (qty) {
-    joins(:inventories).where("inventories.quantity > ?",qty).group(:product_id)
+    joins(:inventories)
+    .select("products.id, products.title")
+    .where("inventories.quantity > ?",qty).group("products.id")
   }
   scope :q_name_with_inven, -> (name) {
     joins(:inventories)
-    .where("title like ? and inventories.quantity > 0","%#{name}%").group(:product_id)
+    .select("products.id, products.title")
+    .where("title like ? and inventories.quantity > 0","%#{name}%").group("products.id")
   }
 end
