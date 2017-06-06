@@ -19,13 +19,13 @@ class Inventory < ApplicationRecord
     joins(:color)
     .select("color_id as id, colors.name as text")
     .where( :product_id => product_id )
-    .group("colors.name","product_options.color_id")
+    .group("colors.name","inventories.color_id")
   }
   scope :getDimensionOption,-> (product_id, color_id) {
     joins(:dimension)
     .select("dimension_id as id, dimensions.name as text")
     .where("product_id = ? and color_id = ?", product_id, color_id)
-    .group("dimensions.name","product_options.dimension_id")
+    .group("dimensions.name","inventories.dimension_id")
   }
 
   def self.add_inventory_from_purchase_item(purchase_item)
