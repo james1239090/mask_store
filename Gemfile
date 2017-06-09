@@ -52,6 +52,8 @@ gem 'cocoon'
 gem 'select2-rails'
 gem 'money-rails', '~>1'
 gem 'taiwan_city'
+gem 'd3-rails'
+gem 'c3-rails'
 
 
 group :development, :test do
