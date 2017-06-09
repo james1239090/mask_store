@@ -54,6 +54,7 @@ gem 'money-rails', '~>1'
 gem 'taiwan_city'
 gem 'd3-rails'
 gem 'c3-rails'
+gem 'gon'
 
 
 group :development, :test do
