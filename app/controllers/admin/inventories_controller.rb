@@ -12,5 +12,6 @@ class Admin::InventoriesController < AdminController
   def show
     @inventory = Inventory.find(params[:id])
     @transactions = @inventory.inventory_transactions.order("id")
+    gon.transactions = @transactions
   end
 end
