@@ -1,5 +1,14 @@
 <h2>銷貨</h2>
 <%= link_to("新增銷貨單", new_admin_sale_path, class:"btn btn-info pull-right") %>
+<div class="row">
+  <div class="col-md-6">
+    <div id="ship_type_pie"></div>
+  </div>
+  <div class="col-md-6">
+    <div id="sale_platform_pie"></div>
+  </div>
+</div>
+
 <table class="table">
   <thead>
     <th>#</th>
@@ -17,3 +26,23 @@
     <% end %>
   </tbody>
 </table>
+<script type="text/javascript">
+  $(function(){
+      var ship_type_config = {
+        bindto: '#ship_type_pie',
+        data: {
+            json: gon.ship_type_count,
+            type : 'pie'
+        },
+        tooltip: {
+          format: {
+            value: function(value, ratio, id){
+              return value;
+            }
+          }
+        }
+      };
+
+      var chart = c3.generate(ship_type_config);
+  });
+</script>

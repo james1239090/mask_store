@@ -3,6 +3,9 @@ class Admin::SalesController < AdminController
 
   def index
     @sales = Sale.all
+
+
+    gon.ship_type_count = @sales.getShipTypeCount
   end
 
   def new

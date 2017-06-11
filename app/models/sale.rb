@@ -11,6 +11,10 @@ class Sale < ApplicationRecord
     "郵寄": 3
   }
 
+  scope :getShipTypeCount, -> {
+    group(:ship_type_id).count
+  }
+
   def calculate_each_item_fee!
     service_rate = self.sale_platform.service_rate / 100
 
@@ -48,6 +52,7 @@ class Sale < ApplicationRecord
     self.total_profit_rate = total_profit / total_sale
     self.save
   end
+
 
 
 end
