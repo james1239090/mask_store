@@ -17,7 +17,7 @@ class Sale < ApplicationRecord
   scope :getSalePlatformCount, -> {
     joins(:sale_platform)
     .select("sale_platforms.name, count(1) as sale_platforms_count")
-    .group(:sale_platform_id)
+    .group(:sale_platform_id, "sale_platforms.name")
   }
 
   scope :getCityCount, -> {
