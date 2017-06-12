@@ -1,14 +1,26 @@
 <h2>銷貨</h2>
 <%= link_to("新增銷貨單", new_admin_sale_path, class:"btn btn-info pull-right") %>
+<br><br><br>
+<h2>銷售總覽</h2>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
+    <div id="sales_chart"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
     <div id="ship_type_pie"></div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-3">
     <div id="sale_platform_pie"></div>
   </div>
 </div>
-
+<div class="row">
+  <div class="col-md-3">
+    <div id="city_pie"></div>
+  </div>
+</div>
+<h2>銷售明細</h2>
 <table class="table">
   <thead>
     <th>#</th>
@@ -28,21 +40,76 @@
 </table>
 <script type="text/javascript">
   $(function(){
-      var ship_type_config = {
+      var ship_type_config,sale_platform_config,sale_platform_data,ship_type_chart,sale_platform_chart, city_config, city_chart, sales_chart, sales_config;
+      var tooltipFormat = {format: {
+                            value: function(value, ratio, id){
+                              return value;
+                            }
+                          }};
+      ship_type_config = {
         bindto: '#ship_type_pie',
         data: {
             json: gon.ship_type_count,
             type : 'pie'
         },
-        tooltip: {
-          format: {
-            value: function(value, ratio, id){
-              return value;
-            }
-          }
-        }
+        tooltip: tooltipFormat
       };
 
-      var chart = c3.generate(ship_type_config);
+      sale_platform_data = gon.sale_platform_count.map(function(value, key) {
+                              return [value.name , value.sale_platforms_count];
+                           });
+
+      sale_platform_config = {
+        bindto: '#sale_platform_pie',
+        data: {
+            columns: sale_platform_data,
+            type : 'pie'
+        },
+        tooltip: tooltipFormat
+      }
+
+      city_config = {
+        bindto: '#city_pie',
+        data: {
+            json: gon.city_count,
+            type : 'pie'
+        },
+        tooltip: tooltipFormat
+      }
+
+      var sales = gon.sales,
+        xDate = ['x'],
+        yData = ['cost'],
+        y2Data = ['price'];
+
+        sales.map(function(item){
+          var itemTime = new Date(item.updated_at),
+              itemFormat = d3.time.format("%H:%M:%S");
+          xDate.push(itemFormat(itemTime));
+          yData.push(item.total_cost);
+          y2Data.push(item.total_sale);
+        });
+
+      sales_config = {
+        bindto: '#sales_chart',
+        data: {
+            x: 'x',
+            columns: [
+              xDate,
+              yData,
+              y2Data
+            ]
+          },
+          axis: {
+            x: {
+              type : 'category'
+            }
+        }
+      }
+
+      ship_type_chart = c3.generate(ship_type_config);
+      sale_platform_chart = c3.generate(sale_platform_config);
+      city_chart = c3.generate(city_config);
+      sales_chart = c3.generate(sales_config);
   });
 </script>

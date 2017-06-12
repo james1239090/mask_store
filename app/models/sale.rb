@@ -14,6 +14,15 @@ class Sale < ApplicationRecord
   scope :getShipTypeCount, -> {
     group(:ship_type_id).count
   }
+  scope :getSalePlatformCount, -> {
+    joins(:sale_platform)
+    .select("sale_platforms.name, count(1) as sale_platforms_count")
+    .group(:sale_platform_id)
+  }
+
+  scope :getCityCount, -> {
+    group(:city_id).count
+  }
 
   def calculate_each_item_fee!
     service_rate = self.sale_platform.service_rate / 100

@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>MaskStore 後台</title>
-    <%= Gon::Base.render_data %>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -10,6 +9,7 @@
 
   </head>
   <body>
+    <%= Gon::Base.render_data %>
     <div class="container">
       <%= render "common/navbar" %>
       <%= notice_message %>

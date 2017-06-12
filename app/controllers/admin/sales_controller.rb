@@ -6,6 +6,9 @@ class Admin::SalesController < AdminController
 
 
     gon.ship_type_count = @sales.getShipTypeCount
+    gon.sale_platform_count = @sales.getSalePlatformCount
+    gon.city_count = @sales.getCityCount.transform_keys{|key| TaiwanCity.get(key)}
+    gon.sales = @sales.order("id")
   end
 
   def new
