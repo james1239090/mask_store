@@ -20,7 +20,7 @@ class InventroyManageService
 
   def update_purchase!
     @source.purchase_items.each do |purchase_item|
-      @inventory = Inventory.getInventory(purchase_item.product_id, purchase_item.dimension_id, purchase_item.color_id)
+      @inventory = Inventory.getInventory(purchase_item.product_id, purchase_item.color_id, purchase_item.dimension_id)
       @inventory.first.update_calculate_avaerage_price(purchase_item)
     end
   end
