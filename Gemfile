@@ -55,6 +55,7 @@ gem 'taiwan_city'
 gem 'd3-rails'
 gem 'c3-rails'
 gem 'gon'
+gem 'sprockets-rails', '2.3.3'
 
 
 group :development, :test do

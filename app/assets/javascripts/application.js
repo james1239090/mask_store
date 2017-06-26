@@ -21,6 +21,7 @@
 //= require d3.v3.min
 //= require c3
 //= require 'taiwan_city/jquery.taiwan_city'
+//= require inspinia.js
 //= require_tree .
 
 $(function() {

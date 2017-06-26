@@ -1,0 +1,71 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                        <img alt="image" class="img-circle" src="<%= image_url 'profile_small.jpg' %>"/>
+                    </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">David Williams</strong>
+                            </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="">Profile</a>
+                        </li>
+                        <li><a href="">Contacts</a>
+                        </li>
+                        <li><a href="">Mailbox</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    IN+
+                </div>
+            </li>
+            <li class="<%= is_active_controller('admin/products') %>">
+                <%= link_to admin_products_path do %>
+                <i class="fa fa-database"></i> <span class="nav-label" data-i18n="nav.gridoptions">Products</span>
+                <% end %>
+            </li>
+            <li class="<%= is_active_controller('admin/orders') %>">
+                <%= link_to admin_orders_path do %>
+                <i class="fa fa-clone"></i> <span class="nav-label" data-i18n="nav.gridoptions">Orders</span>
+                <% end %>
+            </li>
+            <li class="<%= is_active_controller('admin/users') %>">
+                <%= link_to admin_users_path do %>
+                <i class="fa fa-user-circle"></i> <span class="nav-label" data-i18n="nav.gridoptions">Users</span>
+                <% end %>
+            </li>
+            <li class="<%= is_active_controller('admin/purchases') %>">
+                <%= link_to admin_purchases_path do %>
+                <i class="fa fa-exchange"></i> <span class="nav-label" data-i18n="nav.gridoptions">Purchases</span>
+                <% end %>
+            </li>
+            <li class="<%= is_active_controller('admin/sales') %>">
+                <%= link_to admin_sales_path do %>
+                <i class="fa fa-exchange"></i> <span class="nav-label" data-i18n="nav.gridoptions">Sales</span>
+                <% end %>
+            </li>
+            <li class="<%= is_active_controller('admin/inventories') %>">
+                <%= link_to admin_inventories_path do %>
+                <i class="fa fa-cube"></i> <span class="nav-label" data-i18n="nav.gridoptions">Inventory</span>
+                <% end %>
+            </li>
+            <li class="<%= is_active_controller('admin/sale_platforms') %>">
+                <%= link_to admin_sale_platforms_path do %>
+                <i class="fa fa-cubes"></i> <span class="nav-label" data-i18n="nav.gridoptions">SalePlatform</span>
+                <% end %>
+            </li>
+
+        </ul>
+
+    </div>
+</nav>
