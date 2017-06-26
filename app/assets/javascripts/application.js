@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-sprockets
 //= require bootstrap/dropdown
 //= require bootstrap/alert
 //= require dropzone
@@ -22,6 +23,10 @@
 //= require c3
 //= require 'taiwan_city/jquery.taiwan_city'
 //= require inspinia.js
+//= require metisMenu/jquery.metisMenu.js
+//= require pace/pace.min.js
+//= require peity/jquery.peity.min.js
+//= require slimscroll/jquery.slimscroll.min.js
 //= require_tree .
 
 $(function() {
