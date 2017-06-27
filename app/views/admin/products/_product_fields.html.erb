@@ -1,0 +1,35 @@
+<tr>
+  <td><%= product.id %></td>
+  <td>
+    <%= product.title %>
+  </td>
+  <td class="align-text-top">
+    <%= link_to product_path(product) do %>
+      <div class="row">
+        <% if product.photo.present? %>
+          <% product.photo.images.each do |image| %>
+            <div class="col-md-6">
+              <%= image_tag(image.thumb.url, class:"thumbnail") %>
+            </div>
+          <% end %>
+        <% else %>
+          <%= image_tag("http://placehold.it/200x200&text=No Pic",class:"thumbnail") %>
+        <% end %>
+      </div>
+    <% end %>
+  </td>
+  <td>
+    <%= simple_format(product.description) %>
+  </td>
+  <td>
+    <%= product.price %>
+  </td>
+  <td class="text-right">
+    <%= link_to edit_admin_product_path(product), class:"btn btn-xs btn-outline btn-primary" do %>
+      <i class="fa fa-pencil-square-o">Edit</i>
+    <% end %>
+    <%= link_to admin_product_path(product),class:"btn btn-xs btn-outline btn-danger",method: :delete, data:{confirm:"Are you sure?"} do  %>
+      <i class="fa fa-trash">Delete</i>
+    <% end %>
+  </td>
+</tr>
