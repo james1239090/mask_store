@@ -1,48 +1,68 @@
-<%= simple_form_for [:admin,@product]  do |f| %>
-  <div class="group">
-    <%= f.input :title %>
-  </div>
-  <div class="group">
-    <%= f.input :description %>
-  </div>
-  <div class="group">
-    <%= f.input :quantity %>
-  </div>
-  <div class="group">
-    <%= f.input :price %>
-  </div>
-  <label>Options</label>
-  <% if !@product.errors.blank? %>
-    <%= @product.errors.full_messages %>
-  <% end %>
-  <div class="row-fluid">
-    <div class="col-md-offset-1">
-      <div id="options">
-        <div class="row-fluid">
-          <%= link_to_add_association 'new option', f, :product_options,
+<%= simple_form_for [:admin, @product]  do |f| %>
+  <div class="tabs-container">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#tab-1"> Product info</a></li>
+      <li class=""><a data-toggle="tab" href="#tab-2"> Options</a></li>
+      <li class=""><a data-toggle="tab" href="#tab-3"> Images</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="tab-1" class="tab-pane active">
+        <div class="panel-body">
+          <div class="group">
+            <%= f.input :title %>
+          </div>
+          <div class="group">
+            <%= f.input :description, :input_html => { 'rows' => 5} %>
+          </div>
+          <div class="group">
+            <%= f.input :quantity %>
+          </div>
+          <div class="group">
+            <%= f.input :price %>
+          </div>
+        </div>
+      </div>
+      <div id="tab-2" class="tab-pane">
+        <div class="panel-body">
+          <label>Options</label>
+          <% if !@product.errors.blank? %>
+            <%= @product.errors.full_messages %>
+          <% end %>
+          <div class="row-fluid">
+            <div class="col-md-offset-1">
+              <div id="options">
+                <div class="row-fluid">
+                  <%= link_to_add_association 'new option', f, :product_options,
           'data-association-insertion-method' => 'append',
           'data-association-insertion-node' => 'table',
-          class: "btn btn-danger pull-right"
-         %>
-          <br>
-          <table class="table">
-            <tbody>
-              <%= f.simple_fields_for :product_options do |product_option| %>
-                <%= render 'product_option_fields', :f => product_option %>
-              <% end %>
-            </tbody>
-          </table>
+          class: "btn btn-danger pull-right" %>
+                  <br>
+                  <table class="table">
+                    <tbody>
+                      <%= f.simple_fields_for :product_options do |product_option| %>
+                        <%= render 'product_option_fields', :f => product_option %>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="tab-3" class="tab-pane">
+        <div class="panel-body">
+          <div id="myDropzone" class="dropzone">
+            <%= f.simple_fields_for :photo do |c| %>
+              <div class="fallback">
+                <%= c.input :images , as: :file, input_html: { multiple: 'multiple'} %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
+    <br>
+    <%= f.submit "Submit", class:"btn btn-info pull-right",data:{disable_with: "Submitting..."} %>
   </div>
-  <div id="myDropzone" class="dropzone">
-    <%= f.simple_fields_for :photo do |c| %>
-      <div class="fallback">
-        <%= c.input :images , as: :file, input_html: { multiple: 'multiple'} %>
-      </div>
-    <% end %>
-  </div>
-  <br>
-  <%= f.submit "Submit", class:"btn btn-info pull-right",data:{disable_with: "Submitting..."} %>
 <% end %>

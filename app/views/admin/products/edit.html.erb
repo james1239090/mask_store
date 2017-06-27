@@ -1,5 +1,11 @@
-<h2>修改產品</h2>
-<%= render "form" %>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>修改產品</h2>
+      <%= render "form" %>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
   $(function(){
         var post_url = "/admin/products/"+<%= @product.id %>+"/photos";

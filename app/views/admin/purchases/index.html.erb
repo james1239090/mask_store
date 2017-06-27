@@ -1,19 +1,29 @@
-<h2>進貨</h2>
-<%= link_to("新增進貨單", new_admin_purchase_path, class:"btn btn-info pull-right") %>
-<table class="table">
-  <thead>
-    <th>#</th>
-    <th>Date</th>
-    <th>Action</th>
-  </thead>
-  <tbody>
-    <% @purchases.each do |purchase| %>
-      <tr>
-        <td><%= purchase.id %></td>
-        <td><%= link_to(purchase.created_at,admin_purchase_path(purchase)) %></td>
-        <td><%= link_to("Edit", edit_admin_purchase_path(purchase)) %></td>
-        <td><%= link_to("Delete", admin_purchase_path(purchase), method: :delete, data:{confirm: 'Are you sure ?'}) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <h2>進貨</h2>
+          <%= link_to("新增進貨單", new_admin_purchase_path, class:"btn btn-info pull-right") %>
+          <table class="table">
+            <thead>
+              <th>#</th>
+              <th>Date</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <% @purchases.each do |purchase| %>
+                <tr>
+                  <td><%= purchase.id %></td>
+                  <td><%= link_to(purchase.created_at,admin_purchase_path(purchase)) %></td>
+                  <td><%= link_to("Edit", edit_admin_purchase_path(purchase)) %></td>
+                  <td><%= link_to("Delete", admin_purchase_path(purchase), method: :delete, data:{confirm: 'Are you sure ?'}) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
