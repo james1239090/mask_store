@@ -2,6 +2,7 @@ class Admin::PurchasesController < AdminController
   before_action :find_purchase, only: [:edit,:update,:destroy,:show]
   def index
     @purchases = Purchase.all
+    gon.purchases = @purchases.order("id")
   end
 
   def new

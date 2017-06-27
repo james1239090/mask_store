@@ -2,49 +2,79 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox">
-        <div class="ibox-content">
-          <h2>銷貨</h2>
-          <%= link_to("新增銷貨單", new_admin_sale_path, class:"btn btn-info pull-right") %>
-          <br>
-          <br>
-          <br>
-          <h2>銷售總覽</h2>
-          <div class="row">
-            <div class="col-md-12">
-              <div id="sales_chart"></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-              <div id="ship_type_pie"></div>
-            </div>
-            <div class="col-md-3">
-              <div id="sale_platform_pie"></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-              <div id="city_pie"></div>
-            </div>
-          </div>
+        <div class="ibox-title">
           <h2>銷售明細</h2>
-          <table class="table">
+        </div>
+        <div class="ibox-content">
+          <%= link_to("新增銷貨單", new_admin_sale_path, class:"btn btn-info pull-right") %>
+          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
             <thead>
-              <th>#</th>
-              <th>Date</th>
-              <th>Action</th>
+              <tr>
+                <th data-toggle="true">#</th>
+                <th>Sale No.</th>
+                <th class="text-right">Cost</th>
+                <th class="text-right">Profit</th>
+                <th class="text-right">Profit Rate</th>
+                <th class="text-right">Sale Date</th>
+                <th class="text-right">Shipped Date</th>
+                <th class="text-right" data-sort-ignore="true">Action</th>
+              </tr>
             </thead>
             <tbody>
-              <% @sales.each do |sale| %>
-                <tr>
-                  <td><%= sale.id %></td>
-                  <td><%= link_to(sale.created_at, admin_sale_path(sale)) %></td>
-                  <td><%= link_to("Edit", edit_admin_sale_path(sale)) %></td>
-                  <td><%= link_to("Delete", admin_sale_path(sale), method: :delete, data:{confirm: 'Are you sure ?'}) %></td>
-                </tr>
-              <% end %>
+              <%= render :partial => "sale_fields", :collection => @sales, :as => :sale  %>
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="8">
+                  <ul class="pagination pull-right"></ul>
+                </td>
+              </tr>
+            </tfoot>
           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h2>銷售總覽</h2>
+        </div>
+        <div class="ibox-content">
+          <div id="sales_chart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h2>運送類型比率</h2>
+        </div>
+        <div class="ibox-content">
+          <div id="ship_type_pie"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h2>銷售平台比例</h2>
+        </div>
+        <div class="ibox-content">
+          <div id="sale_platform_pie"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h2>縣市比例</h2>
+        </div>
+        <div class="ibox-content">
+          <div id="city_pie"></div>
         </div>
       </div>
     </div>
@@ -110,18 +140,23 @@
             xDate,
             yData,
             y2Data
-          ]
-        },
-        axis: {
+          ],
+          colors: {
+            cost: '#BABABA',
+            price: '#1ab394'
+          }
+      },
+      axis: {
           x: {
             type : 'category'
           }
-      }
-    }
+        },
 
+    }
     ship_type_chart = c3.generate(ship_type_config);
     sale_platform_chart = c3.generate(sale_platform_config);
     city_chart = c3.generate(city_config);
     sales_chart = c3.generate(sales_config);
-    });
+    $('.footable').footable();
+  });
 </script>

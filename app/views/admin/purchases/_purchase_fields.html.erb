@@ -1,0 +1,16 @@
+<tr>
+  <td><%= purchase.id %></td>
+  <td><%= link_to(purchase.created_at.strftime('%s'),admin_purchase_path(purchase)) %></td>
+  <td class="text-right"><%= purchase.total_currency_price %></td>
+  <td class="text-right"><%= purchase.total_tw_price %></td>
+  <td class="text-right"><%= purchase.total_tw_duty %></td>
+  <td class="text-right"><%= purchase.created_at.to_s(:short) %></td>
+  <td class="text-right">
+      <%= link_to edit_admin_purchase_path(purchase), class:"btn btn-xs btn-outline btn-primary" do %>
+      <i class="fa fa-pencil-square-o">Edit</i>
+    <% end %>
+    <%= link_to admin_purchase_path(purchase),class:"btn btn-xs btn-outline btn-danger",method: :delete, data:{confirm:"Are you sure?"} do  %>
+      <i class="fa fa-trash">Delete</i>
+    <% end %>
+  </td>
+</tr>

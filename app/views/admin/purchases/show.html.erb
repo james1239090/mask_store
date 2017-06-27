@@ -1,81 +1,103 @@
-<h2>進貨資訊</h2>
-<table class="talbe">
-  <tbody>
-    <tr>
-      <td colspan="10">total_currency_price</td>
-      <td><%= @purchase.total_currency_price %></td>
-    </tr>
-    <tr>
-      <td colspan="10">total_tw_price</td>
-      <td><%= @purchase.total_tw_price %></td>
-    </tr>
-    <tr>
-      <td colspan="10">total_duty</td>
-      <td><%= @purchase.total_tw_duty %></td>
-    </tr>
-    <tr>
-      <td colspan="10">total_service_fee</td>
-      <td><%= @purchase.total_tw_service_fee %></td>
-    </tr>
-    <tr>
-      <td colspan="10">purchase_date</td>
-      <td><%= @purchase.purchase_date %></td>
-    </tr>
-    <tr>
-      <td colspan="10">delivery_date</td>
-      <td><%= @purchase.delivery_date %></td>
-    </tr>
-    <tr>
-      <td colspan="10">currency_rate</td>
-      <td><%= @purchase.currency_rate %></td>
-    </tr>
-    <tr>
-      <td colspan="10">total_tw_shipping_fee</td>
-      <td><%= @purchase.total_tw_shipping_fee %></td>
-    </tr>
-    <tr>
-      <td colspan="10">total_currency_shipping_fee</td>
-      <td><%= @purchase.total_currency_shipping_fee %></td>
-    </tr>
-    <tr>
-      <td colspan="10">round_diff_money</td>
-      <td><%= @purchase.round_diff_money %></td>
-    </tr>
-  </tbody>
-</table>
-<h2>產品細節</h2>
-<table class="table">
-  <thead>
-    <th>Name</th>
-    <th>Color</th>
-    <th>Size</th>
-    <th>Qty</th>
-    <th>Currency Price</th>
-    <th>Tw Price</th>
-    <th>duty</th>
-    <th>shipping</th>
-    <th>service fee</th>
-    <th>Sub Total</th>
-    <th>Total</th>
-  </thead>
-  <tbody>
-    <% @purchase_items.each do |item| %>
-      <tr>
-        <td><%= item.product.title %></td>
-        <td><%= item.color.name %></td>
-        <td><%= item.dimension.name %></td>
-        <td><%= item.quantity %></td>
-        <td><%= item.currency_price %></td>
-        <td><%= item.tw_price %></td>
-        <td><%= item.duty %></td>
-        <td><%= item.shipping_fee %></td>
-        <td><%= item.service_fee %></td>
-        <td><%= item.sub_total %></td>
-        <td><%= item.total %></td>
-      </tr>
-    <% end %>
-    <tr>
-      <td><%=  %></td>
-    </tr>
-  </tbody>
-</table>
+<div class="wrapper wrapper-content animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h3>進貨資訊</h3>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content p-xl">
+          <div class="row">
+            <div class="col-sm-4 text-left">
+              <h4>
+                <strong>Purchase No </strong>
+                <span class="text-navy"><%= @purchase.created_at.strftime('%s') %></span>
+              </h4>
+              <p>
+                <span><strong>Purchase Date:</strong> <%= @purchase.purchase_date.to_s(:short) %></span><br />
+                <span><strong>Delivery Date:</strong> <%= @purchase.delivery_date %></span>
+              </p>
+            </div>
+            <div class="col-xs-8 text-right">
+              <span> Currency Rate </span>
+              <h2 class="font-bold"><%= @purchase.currency_rate %></h2>
+            </div>
+          </div>
+          <br>
+          <br>
+          <h2>Items</h2>
+          <table class="table">
+            <thead>
+              <th>Name</th>
+              <th>Color</th>
+              <th>Size</th>
+              <th class="text-right">Qty</th>
+              <th class="text-right">Currency Price</th>
+              <th class="text-right">Tw Price</th>
+              <th class="text-right">duty</th>
+              <th class="text-right">shipping</th>
+              <th class="text-right">service fee</th>
+              <th class="text-right">Sub Total</th>
+              <th class="text-right">Total</th>
+            </thead>
+            <tbody>
+              <% @purchase_items.each do |item| %>
+                <tr>
+                  <td><%= item.product.title %></td>
+                  <td><%= item.color.name %></td>
+                  <td><%= item.dimension.name %></td>
+                  <td class="text-right"><%= item.quantity %></td>
+                  <td class="text-right"><%= item.currency_price %></td>
+                  <td class="text-right"><%= item.tw_price %></td>
+                  <td class="text-right"><%= item.duty %></td>
+                  <td class="text-right"><%= item.shipping_fee %></td>
+                  <td class="text-right"><%= item.service_fee %></td>
+                  <td class="text-right"><%= item.sub_total %></td>
+                  <td class="text-right"><%= item.total %></td>
+                </tr>
+              <% end %>
+              <tr>
+                <td><%=  %></td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table invoice-total">
+            <tbody>
+              <tr>
+                <td><strong>Total Currency Shipping Fee :</strong></td>
+                <td>$ <%= @purchase.total_currency_shipping_fee %></td>
+              </tr>
+              <tr>
+                <td><strong>Total Currency Price :</strong></td>
+                <td>$ <%= @purchase.total_currency_price %></td>
+              </tr>
+              <tr>
+                <td><strong>Total Duty :</strong></td>
+                <td>$ <%= @purchase.total_tw_duty %></td>
+              </tr>
+              <tr>
+                <td><strong>Total Tw Shipping Fee :</strong></td>
+                <td>$ <%= @purchase.total_tw_shipping_fee %></td>
+              </tr>
+              <tr>
+                <td><strong>Round Diff Money :</strong></td>
+                <td>$ <%= @purchase.round_diff_money %></td>
+              </tr>
+              <tr>
+                <td><strong>Total Tw Price :</strong></td>
+                <td>$ <%= @purchase.total_tw_price %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
