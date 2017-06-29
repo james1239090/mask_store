@@ -6,6 +6,7 @@
     <%= stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css") %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+    <meta name="turbolinks-cache-control" content="no-preview">
   </head>
   <body>
     <%= Gon::Base.render_data %>
