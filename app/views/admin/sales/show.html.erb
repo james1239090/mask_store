@@ -1,50 +1,122 @@
-<H2>Sale Infomation</H2>
-Order Number: <%= @sale.order_number %><br>
-SalePlatform: <%= @sale.sale_platform.name %><br>
-Shipping Number: <%= @sale.shipping_number %>
-Address: <%= @sale.address %><br>
-Total Cost : <%= @sale.total_cost %><br>
-Total Shipping Fee: <%= @sale.total_shipping_fee %><br>
-Total Service Fee: <%= @sale.total_service_fee %><br>
-Total Profit: <%= @sale.total_profit %><br>
-Total Profit Rate: <%= (@sale.total_profit_rate * 100).round(2).to_s + "%" %><br>
-Total Price: <%= @sale.total_sale %><br>
-Ship Type: <%= @sale.ship_type_id %><br>
-City : <%= TaiwanCity.get(@sale.city_id) %><br>
-District : <%= TaiwanCity.get(@sale.district_id) %><br>
-<table class="table">
-  <thead>
-    <th>Product</th>
-    <th>Color</th>
-    <th>Size</th>
-    <th>Cost</th>
-    <th>Qty</th>
-    <th>Price</th>
-    <th>shipping</th>
-    <th>service</th>
-    <th>credit</th>
-    <th>profit</th>
-    <th>profit_rate</th>
-    <th>sub_cost</th>
-    <th>sub_price</th>
-  </thead>
-  <tbody>
-    <% @sale_items.each do |sale_item| %>
-      <tr>
-        <td><%= sale_item.product.title %></td>
-        <td><%= sale_item.color.name %></td>
-        <td><%= sale_item.dimension.name %></td>
-        <td><%= sale_item.cost %></td>
-        <td><%= sale_item.quantity %></td>
-        <td><%= sale_item.sale_price %></td>
-        <td><%= sale_item.shipping_fee %></td>
-        <td><%= sale_item.service_fee %></td>
-        <td><%= sale_item.credit_fee %></td>
-        <td><%= sale_item.profit %></td>
-        <td><%= (sale_item.profit_rate * 100).round(2).to_s + "%" %></td>
-        <td><%= sale_item.cost_sub_total %></td>
-        <td><%= sale_item.sale_sub_total %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-title">
+          <H2>銷貨資訊</H2>
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-sm-4 text-left">
+              <h2>
+                <strong>Order Number </strong>
+                <span class="text-navy"><%= @sale.order_number %></span>
+              </h2>
+              <table class="table table-borderless">
+                <tbody>
+                  <tr>
+                    <td><strong>Shipping Type</strong></td>
+                    <td><%= @sale.ship_type_id %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Shipping Number</strong></td>
+                    <td><%= @sale.shipping_number %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Sale Date</strong></td>
+                    <td><%= @sale.sale_date %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Shipping Date</strong></td>
+                    <td><%= @sale.sale_date %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>SalePlatform</strong></td>
+                    <td><%= @sale.sale_platform.name %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>City</strong></td>
+                    <td> <%= TaiwanCity.get(@sale.city_id) %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>District</strong></td>
+                    <td><%= TaiwanCity.get(@sale.district_id) %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Address</strong></td>
+                    <td><%= @sale.address %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-sm-8 text-right">
+              <span class="text-danger"> Profit</span>
+              <h3 class="font-bold"><%= @sale.total_profit %></h3>
+              <span class="text-danger"> Profit Rate </span>
+              <h3 class="font-bold"><%= (@sale.total_profit_rate * 100).round(2).to_s + "%" %></h3>
+            <% else %>
+            </div>
+          </div>
+          <div class="row">
+            <table class="table">
+              <thead>
+                <th>Product</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Cost</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>shipping</th>
+                <th>service</th>
+                <th>credit</th>
+                <th>profit</th>
+                <th>profit_rate</th>
+                <th>sub_cost</th>
+                <th>sub_price</th>
+              </thead>
+              <tbody>
+                <% @sale_items.each do |sale_item| %>
+                  <tr>
+                    <td><%= sale_item.product.title %></td>
+                    <td><%= sale_item.color.name %></td>
+                    <td><%= sale_item.dimension.name %></td>
+                    <td><%= sale_item.cost %></td>
+                    <td><%= sale_item.quantity %></td>
+                    <td><%= sale_item.sale_price %></td>
+                    <td><%= sale_item.shipping_fee %></td>
+                    <td><%= sale_item.service_fee %></td>
+                    <td><%= sale_item.credit_fee %></td>
+                    <td><%= sale_item.profit %></td>
+                    <td><%= (sale_item.profit_rate * 100).round(2).to_s + "%" %></td>
+                    <td><%= sale_item.cost_sub_total %></td>
+                    <td><%= sale_item.sale_sub_total %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <table class="table invoice-total">
+              <tbody>
+                <tr>
+                  <td><strong> Total Cost :</strong></td>
+                  <td>$ <%= @sale.total_cost %></td>
+                </tr>
+                <tr>
+                  <td><strong> Total Shipping Fee :</strong></td>
+                  <td>$ <%= @sale.total_shipping_fee %></td>
+                </tr>
+                <tr>
+                  <td><strong> Total Service Fee :</strong></td>
+                  <td>$ <%= @sale.total_service_fee %></td>
+                </tr>
+                <tr>
+                  <td><strong> Total Price :</strong></td>
+                  <td>$ <%= @sale.total_sale %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

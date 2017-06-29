@@ -1,29 +1,44 @@
 <%= simple_form_for [:admin, @sale]  do |f| %>
-  <label>Sale Item</label>
-  <div class="col-md-offset-1">
-    <div class="row">
-      <%= link_to_add_association f, :sale_items,
+  <div class="tabs-container">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#tab-1"> Sale Item</a></li>
+      <li class=""><a data-toggle="tab" href="#tab-2"> Sale Summary</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="tab-1" class="tab-pane active">
+        <div class="panel-body">
+          <div class="row">
+            <%= link_to_add_association f, :sale_items,
                   'data-association-insertion-method' => 'after',
-          'data-association-insertion-node' => '.nested-fields:last',
-        class:"btn btn-success btn-xs pull-right" do %>
-        <i class="fa fa-plus"></i>Add Sale Item
-        <% end %>
+                  'data-association-insertion-node' => '.nested-fields:last',
+                  class:"btn btn-success btn-xs pull-right" do %>
+              <i class="fa fa-plus"></i>Add Item
+            <% end %>
+          </div>
+          <br>
+          <%= render 'sale_item_header' %>
+          <%= f.simple_fields_for :sale_items do |sale_item| %>
+            <%= render 'sale_item_fields', f: sale_item %>
+          <% end %>
+        </div>
+      </div>
+      <div id="tab-2" class="tab-pane">
+        <div class="panel-body">
+          <%= f.input :order_number %>
+          <div class="city-group">
+            <%= f.input :city_id, collection: TaiwanCity.list, input_html: { class: "city-select" } %>
+            <%= f.input :district_id, as: :select, input_html: { class: "city-select" } %>
+          </div>
+          <%= f.input :address %>
+          <%= f.input :sale_platform_id, collection: SalePlatform.all, value_method: :id, label_method: :name%>
+          <%= f.input :ship_type_id, collection: Sale.ship_type_ids.keys %>
+          <%= f.input :shipping_number %>
+          <%= f.input :sale_date,as: :date, html5: true %>
+          <%= f.input :shipping_date,as: :date, html5: true %>
+        </div>
+      </div>
     </div>
     <br>
-    <%= render 'sale_item_header' %>
-    <%= f.simple_fields_for :sale_items do |sale_item| %>
-      <%= render 'sale_item_fields', f: sale_item %>
-    <% end %>
-    <%= f.input :order_number %>
-    <div class="city-group">
-      <%= f.input :city_id, collection: TaiwanCity.list, input_html: { class: "city-select" } %>
-      <%= f.input :district_id, as: :select, input_html: { class: "city-select" } %>
-    </div>
-    <%= f.input :address %>
-    <%= f.input :sale_platform_id, collection: SalePlatform.all, value_method: :id, label_method: :name%>
-    <%= f.input :ship_type_id, collection: Sale.ship_type_ids.keys %>
-    <%= f.input :shipping_number %>
-    <%= f.input :sale_date,as: :date, html5: true %>
-    <%= f.input :shipping_date,as: :date, html5: true %>
     <%= f.submit "Submit", class:"btn btn-info pull-right",data:{ disable_with: "Submitting..." } %>
-  <% end %>
+  </div>
+<% end %>

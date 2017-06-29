@@ -8,4 +8,7 @@
 @import "font-awesome";
 
 
-
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th {
+    border: none;
+}

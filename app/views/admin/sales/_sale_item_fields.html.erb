@@ -1,28 +1,24 @@
 <div class="row nested-fields form-group">
-  <div class="row">
-    <div class="col-md-6">
-      <%= f.association :product, collention: Product.get_inventory(0) ,label: false, input_html:{class:"select_product", data: {selectfrom: "sale"}} %>
-    </div>
-    <div class="col-md-3">
-      <%= f.association :color, label: false, input_html: { class: "select_color",data: {selectfrom: "sale"} } %>
-    </div>
-    <div class="col-md-3">
-      <%= f.association :dimension, label: false, input_html: { class: "select_dimension",data: {selectfrom: "sale"} } %>
-    </div>
-      </div>
-  <div class="row">
-    <div class="col-md-3">
-      <%= f.input :quantity  ,label: false%>
-    </div>
-    <div class="col-md-3">
-      <%= f.input :sale_price ,label: false %>
-    </div>
-    <div class="col-md-3">
-      <%= f.input :shipping_fee ,label: false %>
-    </div>
-    <div class="col-md-2"></div>
-    <%= link_to_remove_association f, class:"btn" do %>
-      <i class="fa fa-trash"></i>
-    <% end %>
+  <div class="col-md-2">
+    <%= f.association :product, collention: Product.get_inventory(0) ,label: false, input_html:{class:"select_product", data: {selectfrom: "sale"}} %>
   </div>
+  <div class="col-md-2">
+    <%= f.association :color, label: false, input_html: { class: "select_color",data: {selectfrom: "sale"} } %>
+  </div>
+  <div class="col-md-1">
+    <%= f.association :dimension, label: false, input_html: { class: "select_dimension",data: {selectfrom: "sale"} } %>
+  </div>
+  <div class="col-md-2">
+    <%= f.input :quantity  ,label: false%>
+  </div>
+  <div class="col-md-2">
+    <%= f.input :sale_price ,label: false %>
+  </div>
+  <div class="col-md-2">
+    <%= f.input :shipping_fee ,label: false %>
+  </div>
+  <div class="col-md-1"></div>
+  <%= link_to_remove_association f, class:"btn" do %>
+    <i class="fa fa-trash"></i>
+  <% end %>
 </div>
