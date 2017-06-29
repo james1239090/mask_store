@@ -6,27 +6,45 @@
           <h2>銷售平台(SalePlatform)</h2>
           <br>
           <%= link_to("New SalePlatform", new_admin_sale_platform_path, class:"btn btn-info pull-right") %>
-          <table class="table">
+          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
             <thead>
               <th>#</th>
               <th>Name</th>
-              <th>Service Rate (%)</th>
-              <th colspan="2">Action</th>
+              <th class="text-right">Service Rate (%)</th>
+              <th class="text-right" data-sort-ignore="true">Action</th>
             </thead>
             <tbody>
               <% @sale_platforms.each do |sale_platform| %>
                 <tr>
                   <td><%= sale_platform.id %></td>
                   <td><%= sale_platform.name %></td>
-                  <td><%= sale_platform.service_rate %></td>
-                  <td><%= link_to("Edit", edit_admin_sale_platform_path(sale_platform)) %></td>
-                  <td><%= link_to("Delete", admin_sale_platform_path(sale_platform), method: :delete, data: {confirm: 'Are you sure ?'}) %></td>
+                  <td class="text-right"><%= sale_platform.service_rate %></td>
+                  <td class="text-right">
+                    <%= link_to edit_admin_sale_platform_path(sale_platform), class:"btn btn-xs btn-outline btn-primary" do %>
+                      <i class="fa fa-pencil-square-o">Edit</i>
+                    <% end %>
+                    <%= link_to admin_sale_platform_path(sale_platform),class:"btn btn-xs btn-outline btn-danger",method: :delete, data:{confirm:"Are you sure?"} do  %>
+                      <i class="fa fa-trash">Delete</i>
+                    <% end %>
+                  </td>
                 </tr>
               <% end %>
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="8">
+                  <ul class="pagination pull-right"></ul>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(function() {
+        $('.footable').footable();
+      });
+</script>
