@@ -4,15 +4,16 @@
       <div class="ibox">
         <div class="ibox-content">
           <h2>Inventory</h2>
-          <table class="table">
+          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
             <thead>
-              <th>#</th>
+              <th data-toggle="true">#</th>
               <th>Product</th>
               <th>Color</th>
               <th>Size</th>
               <th>Cost</th>
               <th>Quantity</th>
               <th>Update_date</th>
+              <th data-sort-ignore="true">Action</th>
             </thead>
             <tbody>
               <% @inventories.each do |inventory| %>
@@ -23,13 +24,26 @@
                   <td><%= inventory.dimension.name %></td>
                   <td><%= inventory.cost %></td>
                   <td><%= inventory.quantity %></td>
-                  <td><%= link_to(inventory.updated_at, admin_inventory_path(inventory)) %></td>
+                  <td><%= inventory.updated_at.to_s(:short) %></td>
+                  <td><%= link_to("view", admin_inventory_path(inventory), class: "btn btn-xs  btn-info btn-outline") %></td>
                 </tr>
               <% end %>
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="8">
+                  <ul class="pagination pull-right"></ul>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(function(){
+    $('.footable').footable();
+  });
+</script>
