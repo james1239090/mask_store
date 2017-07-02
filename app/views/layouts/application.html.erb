@@ -6,17 +6,20 @@
     <%= stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css") %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
   </head>
-  <body>
+  <body class="top-navigation">
     <div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
+      <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom white-bg">
+          <%= render "common/navbar" %>
+        </div>
+        <%= notice_message %>
+        <div class="container">
+          <%= yield %>
+        </div>
+      </div>
+      <%= javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js") %>
+      <%= yield :javascript %>
     </div>
-    <div class="container">
-      <%= render "common/navbar" %>
-      <%= notice_message %>
-      <%= yield %>
-    </div>
-    <%= javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js") %>
-    <%= yield :javascript %>
   </body>
 </html>

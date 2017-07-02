@@ -57,6 +57,7 @@ gem 'c3-rails'
 gem 'gon'
 gem 'sprockets-rails', '2.3.3'
 gem 'rails-i18n', '~> 5.0.0' # For 5.0.x and 5.1.x
+gem "jquery-slick-rails"
 
 
 
