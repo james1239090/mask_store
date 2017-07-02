@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   include Filterable
-
+  validates :title,:price ,presence: true
   has_one :photo, dependent: :destroy
   has_many :product_options, dependent: :destroy
   has_many :dimensions, :through => :product_options, source: :dimension
