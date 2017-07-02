@@ -4,7 +4,7 @@
   <td class="text-right"><%= sale.total_cost %></td>
   <td class="text-right"><%= sale.total_profit %></td>
   <td class="text-right"><%= render_profit_rate(sale.total_profit_rate) %></td>
-  <td class="text-right"><%= sale.created_at.to_s(:short) %></td>
+  <td class="text-right"><%= render_date_with_format(sale.created_at, :short) %></td>
   <td class="text-right"><%= sale.shipping_date %></td>
   <td class="text-right">
     <%= link_to edit_admin_sale_path(sale), class:"btn btn-xs btn-outline btn-primary" do %>

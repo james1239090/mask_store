@@ -22,16 +22,24 @@ module ApplicationHelper
   def render_cart_items_count(cart)
     cart.cart_items.count
   end
-    def is_active_controller(controller_name, class_name = nil)
-        if params[:controller] == controller_name
-         class_name == nil ? "active" : class_name
-        else
-           nil
-        end
+  def is_active_controller(controller_name, class_name = nil)
+    if params[:controller] == controller_name
+      class_name == nil ? "active" : class_name
+    else
+      nil
+    end
+  end
+
+  def is_active_action(action_name)
+    params[:action] == action_name ? "active" : nil
+  end
+
+  def render_date_with_format(date,format)
+    unless date.blank?
+      date.to_s(format)
     end
 
-    def is_active_action(action_name)
-        params[:action] == action_name ? "active" : nil
-    end
+  end
+
 
 end

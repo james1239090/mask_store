@@ -58,7 +58,7 @@
                   <td class="text-right"><%= transaction.change_quantity %></td>
                   <td class="text-right"><%= transaction.final_cost %></td>
                   <td class="text-right"><%= transaction.final_quantity %></td>
-                  <td class="text-right"><%= transaction.updated_at.to_s(:short) %></td>
+                  <td class="text-right"><%= render_date_with_format(transaction.updated_at, :short) %></td>
                 </tr>
               <% end %>
             </tbody>

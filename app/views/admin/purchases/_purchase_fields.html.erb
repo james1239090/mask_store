@@ -4,7 +4,7 @@
   <td class="text-right"><%= purchase.total_currency_price %></td>
   <td class="text-right"><%= purchase.total_tw_price %></td>
   <td class="text-right"><%= purchase.total_tw_duty %></td>
-  <td class="text-right"><%= purchase.created_at.to_s(:short) %></td>
+  <td class="text-right"><%= render_date_with_format(purchase.created_at, :short) %></td>
   <td class="text-right">
       <%= link_to edit_admin_purchase_path(purchase), class:"btn btn-xs btn-outline btn-primary" do %>
       <i class="fa fa-pencil-square-o">Edit</i>

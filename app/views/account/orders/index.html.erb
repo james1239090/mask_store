@@ -10,7 +10,7 @@
     <% @orders.each do |order| %>
       <tr>
         <td><%= link_to(order.id,order_path(order.token)) %></td>
-        <td><%= order.created_at.to_s(:long) %></td>
+        <td><%= render_date_with_format( order.created_at, :long) %></td>
       </tr>
     <% end %>
   </tbody>

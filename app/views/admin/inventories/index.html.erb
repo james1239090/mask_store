@@ -24,7 +24,7 @@
                   <td><%= inventory.dimension.name %></td>
                   <td><%= inventory.cost %></td>
                   <td><%= inventory.quantity %></td>
-                  <td><%= inventory.updated_at.to_s(:short) %></td>
+                  <td><%= render_date_with_format(inventory.updated_at, :short) %></td>
                   <td><%= link_to("view", admin_inventory_path(inventory), class: "btn btn-xs  btn-info btn-outline") %></td>
                 </tr>
               <% end %>

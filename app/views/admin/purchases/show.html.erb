@@ -13,8 +13,8 @@
                 <span class="text-navy"><%= @purchase.created_at.strftime('%s') %></span>
               </h4>
               <p>
-                <span><strong>Purchase Date:</strong> <%= @purchase.purchase_date.to_s(:short) %></span><br />
-                <span><strong>Delivery Date:</strong> <%= @purchase.delivery_date %></span>
+                <span><strong>Purchase Date:</strong> <%= render_date_with_format(@purchase.purchase_date, :short) %></span><br />
+                <span><strong>Delivery Date:</strong> <%= render_date_with_format(@purchase.delivery_date, :short) %></span>
               </p>
             </div>
             <div class="col-xs-8 text-right">
