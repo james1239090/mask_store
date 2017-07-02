@@ -27,7 +27,7 @@
           <%= f.input :order_number %>
           <div class="city-group">
             <%= f.input :city_id, collection: TaiwanCity.list, input_html: { class: "city-select" } %>
-            <%= f.input :district_id, as: :select, input_html: { class: "city-select" } %>
+            <%= f.input :district_id, collection: TaiwanCity.list(f.object.district_id),as: :select, input_html: { class: "city-select" } %>
           </div>
           <%= f.input :address %>
           <%= f.input :sale_platform_id, collection: SalePlatform.all, value_method: :id, label_method: :name%>
