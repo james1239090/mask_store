@@ -58,4 +58,7 @@ Rails.application.configure do
   config.after_initialize do
     ActiveMerchant::Billing::Base.mode = :development
   end
+
+  config.i18n.available_locales = ['zh-TW']
+
 end
