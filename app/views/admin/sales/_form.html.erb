@@ -11,7 +11,7 @@
             <%= link_to_add_association f, :sale_items,
                   'data-association-insertion-method' => 'after',
                   'data-association-insertion-node' => '.nested-fields:last',
-                  class:"btn btn-success btn-xs pull-right" do %>
+                  class:"btn btn-success btn-xs pull-right", id: "add_item" do %>
               <i class="fa fa-plus"></i>Add Item
             <% end %>
           </div>
