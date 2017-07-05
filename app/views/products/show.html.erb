@@ -60,13 +60,8 @@
 </div>
 <script type="text/javascript">
   $(function() {
-    $('.product-slick').slick({
-      dots: true,
-      infinite: true,
-      speed: 500,
-      fade: true
-    });
-    $('.select_color, .select_dimension, .select_quantity').select2({
+    var select2BaseConfig, select2ColorConfig, select2DimensionConfig, select2QuantityConfig;
+    select2BaseConfig= {
       theme: "bootstrap",
       escapeMarkup: function(markup) {
         return markup;
@@ -75,10 +70,22 @@
         id: '-1',
         text: 'Select an Option'
       },
-      width: '100%',
-    });
+      width: '100%'
+    };
+    select2ColorConfig = select2DimensionConfig = select2QuantityConfig = select2BaseConfig;
 
-    $.ajax({
+    $(".select_dimension, .select_quantity").prop("disabled", true);
+
+    $('.product-slick').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      fade: true
+    });
+    $('.select_color, .select_dimension, .select_quantity').select2(select2BaseConfig);
+
+    function getProductColorOption(){
+      $.ajax({
         url: "/admin/inventories.json",
         dataType: "JSON",
         data: {
@@ -86,23 +93,16 @@
         },
         success: function(data) {
           removeOption($('.select_color'));
-          $('.select_color').select2({
-            theme: "bootstrap",
-            escapeMarkup: function(markup) {
-              return markup;
-            },
-            data: data,
-            placeholder: {
-              id: '-1', // the value of the option
-              text: 'Select Color'
-            },
-            width: '100%',
-          }).select2('val', -1);
+          select2ColorConfig.data = data;
+          select2ColorConfig.placeholder.text = 'Select Color'
+          $('.select_color').select2(select2ColorConfig).select2('val', -1);
         }
       });
+    }
 
 
 
+    getProductColorOption();
     $('.select_color').on('select2:select', function(e) {
       var color_id = $(this).val(),
         $select_product = <%= @product.id %>,
@@ -115,19 +115,11 @@
           getDimensionOption: [$select_product, color_id]
         },
         success: function(data) {
+          $selct_dimension.prop("disabled", false);
           removeOption($selct_dimension);
-          $selct_dimension.select2({
-            theme: "bootstrap",
-            escapeMarkup: function(markup) {
-              return markup;
-            },
-            data: data,
-            placeholder: {
-              id: '-1', // the value of the option
-              text: 'Select Dimension'
-            },
-            width: '100%',
-          }).select2('val', -1);
+          select2DimensionConfig.data = data;
+          select2DimensionConfig.placeholder.text = 'Select Dimension'
+          $selct_dimension.select2(select2DimensionConfig).select2('val', -1);
         }
       });
     });
@@ -146,27 +138,17 @@
           getInventory: [$select_product, $select_color, dimension_id ]
         },
         success: function(data) {
-
+          $select_quantity.prop("disabled", false);
           var options = [];
-
           for (var i = 1; i <= data[0].quantity; i++) {
             var option = {id: i , text: i};
             options.push(option);
           }
-
           removeOption($select_quantity);
-          $select_quantity.select2({
-            theme: "bootstrap",
-            escapeMarkup: function(markup) {
-              return markup;
-            },
-            data: options,
-            placeholder: {
-              id: '-1', // the value of the option
-              text: 'Select Quantity'
-            },
-            width: '100%',
-          }).select2('val', -1);
+          select2QuantityConfig.data = options;
+          select2QuantityConfig.placeholder.text = 'Select Quantity';
+          select2QuantityConfig.minimumResultsForSearch = "Infinity";
+          $select_quantity.select2(select2QuantityConfig).select2('val', -1);
         }
       });
     });
