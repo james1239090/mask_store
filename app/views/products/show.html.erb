@@ -9,11 +9,11 @@
                 <% if @product.photo.present? %>
                   <% @product.photo.images.each do |image| %>
                     <div>
-                        <%= image_tag(image.medium.url, class:"thumbnail") %>
+                      <%= image_tag(image.medium.url, class:"thumbnail") %>
                     </div>
                   <% end %>
                 <% else %>
-                    <%= image_tag("http://placehold.it/200x200&text=No Pic") %>
+                  <%= image_tag("http://placehold.it/200x200&text=No Pic") %>
                 <% end %>
               </div>
             </div>
@@ -30,31 +30,145 @@
                 <%= @product.description %>
               </div>
               <hr>
-              <div>
-                <div class="btn-group pull-right">
-                  <% if @product.quantity > 0  %>
-                    <%= link_to add_to_cart_product_path(@product),method: :post,:class=>"btn btn-primary btn-sm" do %>
-                      <i class="fa fa-cart-plus"></i> 加入購物車
-                      <% end %>
-                  <% else %>
-                    <span class="label">已銷售一空無法購買</span>
+              <%= simple_form_for current_cart, url: add_to_cart_product_path(@product), method: :post do |f| %>
+                <div class="row">
+                  <%= f.simple_fields_for :cart_items do |c| %>
+                    <div class="col-md-4">
+                      <%= c.input :color_id, as: :select, input_html: { class:"select_color" }  %>
+                    </div>
+                    <div class="col-md-4">
+                      <%= c.input :dimension_id, as: :select,collection: [['Select Dimension','-1']],input_html: {class:"select_dimension"}  %>
+                    </div>
+                    <div class="col-md-4">
+                      <%= c.input :quantity, as: :select,collection: [['Select Quantity','-1']],input_html: {class:"select_quantity"} %>
+                    </div>
                   <% end %>
                 </div>
               </div>
-            </div>
+              <div class="pull-right">
+                <%= button_tag(type: 'submit', method: :post, class: "btn btn-danger btn-lg") do %>
+                  <i class="fa fa-cart-plus"></i> 加入購物車
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+</div>
 <script type="text/javascript">
   $(function() {
-        $('.product-slick').slick({
-          dots: true,
-          infinite: true,
-          speed: 500,
-          fade: true
-        });
+    $('.product-slick').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      fade: true
+    });
+    $('.select_color, .select_dimension, .select_quantity').select2({
+      theme: "bootstrap",
+      escapeMarkup: function(markup) {
+        return markup;
+      },
+      placeholder: {
+        id: '-1',
+        text: 'Select an Option'
+      },
+      width: '100%',
+    });
+
+    $.ajax({
+        url: "/admin/inventories.json",
+        dataType: "JSON",
+        data: {
+          getColorOption: <%= @product.id %>
+        },
+        success: function(data) {
+          removeOption($('.select_color'));
+          $('.select_color').select2({
+            theme: "bootstrap",
+            escapeMarkup: function(markup) {
+              return markup;
+            },
+            data: data,
+            placeholder: {
+              id: '-1', // the value of the option
+              text: 'Select Color'
+            },
+            width: '100%',
+          }).select2('val', -1);
+        }
+      });
+
+
+
+    $('.select_color').on('select2:select', function(e) {
+      var color_id = $(this).val(),
+        $select_product = <%= @product.id %>,
+        $selct_dimension = $(".select_dimension");
+        url = "/admin/inventories.json";
+      $.ajax({
+        url: url,
+        dataType: "JSON",
+        data: {
+          getDimensionOption: [$select_product, color_id]
+        },
+        success: function(data) {
+          removeOption($selct_dimension);
+          $selct_dimension.select2({
+            theme: "bootstrap",
+            escapeMarkup: function(markup) {
+              return markup;
+            },
+            data: data,
+            placeholder: {
+              id: '-1', // the value of the option
+              text: 'Select Dimension'
+            },
+            width: '100%',
+          }).select2('val', -1);
+        }
+      });
+    });
+
+
+    $('.select_dimension').on('select2:select', function(e) {
+      var dimension_id = $(this).val(),
+        $select_product = <%= @product.id %>,
+        $select_color = $(".select_color").val(),
+        $select_quantity = $(".select_quantity");
+        url = "/admin/inventories.json";
+      $.ajax({
+        url: url,
+        dataType: "JSON",
+        data: {
+          getInventory: [$select_product, $select_color, dimension_id ]
+        },
+        success: function(data) {
+
+          var options = [];
+
+          for (var i = 1; i <= data[0].quantity; i++) {
+            var option = {id: i , text: i};
+            options.push(option);
+          }
+
+          removeOption($select_quantity);
+          $select_quantity.select2({
+            theme: "bootstrap",
+            escapeMarkup: function(markup) {
+              return markup;
+            },
+            data: options,
+            placeholder: {
+              id: '-1', // the value of the option
+              text: 'Select Quantity'
+            },
+            width: '100%',
+          }).select2('val', -1);
+        }
+      });
+    });
   });
 </script>
