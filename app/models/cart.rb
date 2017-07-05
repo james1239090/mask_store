@@ -2,9 +2,11 @@ class Cart < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :items, through: :cart_items, source: :product
 
-  def add_product_to_cart(product)
+  def add_product_to_cart(product, color, dimension)
     ci = cart_items.build
     ci.product = product
+    ci.color_id = color
+    ci.dimension_id = dimension
     ci.save
   end
 
