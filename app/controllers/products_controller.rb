@@ -9,10 +9,11 @@ class ProductsController < ApplicationController
 
   def add_to_cart
     @product = Product.find(params[:id])
-    if params.has_key?(:color_id) && params.has_key?(:dimension_id)
+    if (!params[:cart].blank? && !params[:cart][:cart_items].blank? && !params[:cart][:cart_items][:color_id].blank? && !params[:cart][:cart_items][:dimension_id].blank?)
       @color = params[:cart][:cart_items][:color_id]
       @dimension = params[:cart][:cart_items][:dimension_id]
-      current_cart.add_product_to_cart(@product,@color,@dimension)
+      @quantity = params[:cart][:cart_items][:quantity] || 1
+      current_cart.add_product_to_cart(@product,@color,@dimension,@quantity)
       flash[:notice] = "你已成功將#{@product.title} 加入購物車"
     else
       flash[:warning] = "請選擇顏色或尺吋"
@@ -20,4 +21,7 @@ class ProductsController < ApplicationController
 
     redirect_to :back
   end
+
+
+
 end
