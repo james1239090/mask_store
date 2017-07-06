@@ -14,18 +14,9 @@ class CartItemsController < ApplicationController
     @cart = current_cart
     @item = @cart.cart_items.find(params[:id])
 
-    puts "--------------------------------------------"
-    puts !params[:cart_item].blank?
-    puts !item_params[:color_id].blank?
-    puts !item_params[:dimension_id].blank?
-    puts !item_params[:quantity].blank?
-
-    puts "--------------------------------------------"
-
-
     if !item_params[:color_id].blank? && !item_params[:dimension_id].blank? && !item_params[:quantity].blank?
       @inventory = Inventory.getInventory(@item.product.id, params[:cart_item][:color_id], params[:cart_item][:dimension_id])
-      if @inventory.first.quantity >= item_params[:quantity].to_i && item_params[:quantity] > 0
+      if @inventory.first.quantity >= item_params[:quantity].to_i
         @item.update(item_params)
         flash[:notice] = "成功將#{@item.product.title}顏色、尺吋、數量更新"
       else

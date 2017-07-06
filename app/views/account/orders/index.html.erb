@@ -1,17 +1,33 @@
-<h2>訂單列表</h2>
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>生成時間</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= link_to(order.id,order_path(order.token)) %></td>
-        <td><%= render_date_with_format( order.created_at, :long) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h2>訂單列表</h2>
+        </div>
+        <div class="ibox-content">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>生成時間</th>
+                <th>訂單金額</th>
+                <th>訂單狀態</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @orders.each do |order| %>
+                <tr>
+                  <td><%= link_to(order.id,order_path(order.token)) %></td>
+                  <td><%= render_date_with_format( order.created_at, :long) %></td>
+                  <td class="text-right"> $ <%= order.total %></td>
+                  <td><%= render_order_state(order) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
