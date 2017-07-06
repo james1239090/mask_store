@@ -3,7 +3,6 @@ class Cart < ApplicationRecord
   has_many :items, through: :cart_items, source: :product
 
 
-
   def add_product_to_cart(product, color, dimension, quantity)
     ci = cart_items.build
     ci.product = product

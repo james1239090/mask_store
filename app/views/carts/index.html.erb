@@ -1,61 +1,136 @@
-<div class="row">
-  <div class="col-md-12">
-    <%= link_to("清空購物車", clean_carts_path, method: :delete, class:"pull-right",style:"text-decoration:underline;",data:{confirm:"你確定要清空整個購物車嗎？"}) %>
-    <h2>購物車</h2>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th colspan="2">商品資訊</th>
-          <th>單價</th>
-          <th>數量</th>
-          <th>操作選項</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% current_cart.items.each do |product| %>
-          <tr>
-            <td>
-              <%= link_to product_path(product) do %>
-                <% if product.photo.present? %>
-                  <% product.photo.images.each do |image| %>
-                    <%= image_tag(image.thumb.url,class:"thumbnail") %>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h2>購物車</h2>
+        </div>
+        <div class="ibox-content">
+          <%= link_to("清空購物車", clean_carts_path, method: :delete, class:"pull-right",style:"text-decoration:underline;",data:{confirm:"你確定要清空整個購物車嗎？"}) %>
+          <br>
+          <br>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th colspan="2">商品資訊</th>
+                <th>顏色</th>
+                <th>尺吋</th>
+                <th>數量</th>
+                <th>單價</th>
+                <th>操作選項</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% current_cart.cart_items.each do |cart_item| %>
+                <tr>
+                  <td>
+                    <% if cart_item.product.photo.present? %>
+                      <%= image_tag(cart_item.product.photo.images.first.thumb.url,class:"thumbnail") %>
+                    <% else %>
+                      <%= image_tag("http://placehold.it/50x50&No Pic", class: "thumbnail") %>
+                    <% end %>
+                  </div>
+                </td>
+                <td>
+                  <%= link_to(cart_item.product.title,product_path(cart_item.product)) %>
+                </td>
+
+                <%= simple_form_for cart_item, url: item_path(cart_item) do |f| %>
+                  <td data-pid="<%= cart_item.product.id  %>"> <%= f.association :color,as: :select, collection: Inventory.getColorOption(f.object.product_id),label_method: :text, input_html: { class:"select_color" }, label: false,include_blank: false, include_hidden: false  %></td>
+                  <td data-pid="<%= cart_item.product.id  %>"><%= f.association :dimension, as: :select, collection: Inventory.getDimensionOption(f.object.product_id, f.object.color_id),label_method: :text, input_html: { class:"select_dimension" }, label: false, include_blank: false, include_hidden: false  %></td>
+                  <td>
+                    <%= f.input :quantity, input_html: { class:"select_quantity" , max: Inventory.getInventory(f.object.product, f.object.color_id, f.object.dimension_id).first.quantity, min: 0}, label: false %>
+                  </td>
+
+                  <td><%= cart_item.product.price %></td>
+                  <td>
+                    <%= f.submit "更新", data: {disable_with: "Submiting..."} %>
                   <% end %>
-                <% else %>
-                  <%= image_tag("http://placehold.it/200x200&No Pic", class: "thumbnail") %>
-                <% end %>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to(product.title,product_path(product)) %>
-            </td>
-            <td><%=  product.price %></td>
-            <td>
-              <% item = current_cart.find_cart_item(product) %>
-              <%= form_for item, url: item_path(product) do |f| %>
-                <%= f.select :quantity, 1..product.quantity %>
-                <%= f.submit "更新", data: {disable_with: "Submiting..."} %>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to item_path(product), method: :delete do  %>
-                <i class="fa fa-trash"></i>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <br>
-    <div class="total clearfix">
-      <span class="pull-right">
-        <span>
-          總計 <%= render_cart_total_price(current_cart) %> NTD
+                  <%= link_to item_path(cart_item), method: :delete do  %>
+                    <i class="fa fa-trash"></i>
+                  <% end %>
+                </td>
+
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <br>
+        <div class="total clearfix">
+          <span class="pull-right">
+            <span>
+              總計 <%= render_cart_total_price(current_cart) %> NTD
         </span>
-      </span>
-    </div>
-    <hr>
-    <div class="checkout clearfix">
-      <%= link_to("確認結帳", checkout_carts_path , method: :post, class: "btn btn-lg btn-danger pull-right") %>
+          </span>
+        </div>
+        <hr>
+        <div class="checkout clearfix">
+          <%= link_to("確認結帳", checkout_carts_path , method: :post, class: "btn btn-lg btn-danger pull-right") %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+</div>
+<script type="text/javascript">
+  $(function() {
+      var select2BaseConfig, select2ColorConfig, select2DimensionConfig, select2QuantityConfig;
+      select2BaseConfig= {
+        theme: "bootstrap",
+        escapeMarkup: function(markup) {
+          return markup;
+        },
+        placeholder: {
+          id: '-1',
+          text: 'Select an Option'
+        },
+        width: '100%'
+      };
+      select2ColorConfig = select2DimensionConfig = select2QuantityConfig = select2BaseConfig;
+      $('.select_color, .select_dimension').select2(select2BaseConfig);
+
+      $('.select_color').on('select2:select', function(e) {
+        var color_id = $(this).val(),
+          $select_product = $(this).parent().parent().data("pid"),
+          $selct_dimension = $(this).parent().parent().next().find(".select_dimension");
+
+          url = "/admin/inventories.json";
+        $.ajax({
+          url: url,
+          dataType: "JSON",
+          data: {
+            getDimensionOption: [$select_product, color_id]
+          },
+          success: function(data) {
+            $selct_dimension.prop("disabled", false);
+            removeOption($selct_dimension);
+            select2DimensionConfig.data = data;
+            select2DimensionConfig.placeholder.text = 'Select Dimension'
+            $selct_dimension.select2(select2DimensionConfig).select2('val', -1);
+          }
+        });
+      });
+
+      $('.select_dimension').on('select2:select', function(e) {
+        var dimension_id = $(this).val(),
+          $parentTD = $(this).parent().parent(),
+          $select_product = $parentTD.data("pid"),
+          $select_color = $parentTD.prev().find(".select_color"),
+          $select_quantity = $parentTD.next().find(".select_quantity");
+          url = "/admin/inventories.json";
+        $.ajax({
+          url: url,
+          dataType: "JSON",
+          data: {
+            getInventory: [$select_product, $select_color.val(), dimension_id ]
+          },
+          success: function(data) {
+            $select_quantity.prop("disabled", false);
+            $select_quantity.val(0);
+            $select_quantity.attr("max",data[0].quantity);
+          }
+        });
+      });
+
+  });
+</script>

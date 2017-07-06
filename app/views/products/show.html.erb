@@ -37,10 +37,10 @@
                       <%= c.input :color_id, as: :select, input_html: { class:"select_color" }  %>
                     </div>
                     <div class="col-md-4">
-                      <%= c.input :dimension_id, as: :select,collection: [['Select Dimension','-1']],input_html: {class:"select_dimension"}  %>
+                      <%= c.input :dimension_id, as: :select,collection: [['Select Dimension','-1']],input_html: {class:"select_dimension", disabled: true}  %>
                     </div>
                     <div class="col-md-4">
-                      <%= c.input :quantity, as: :select,collection: [['Select Quantity','-1']],input_html: {class:"select_quantity"} %>
+                      <%= c.input :quantity, as: :select,collection: [['Select Quantity','-1']],input_html: {class:"select_quantity", disabled: true} %>
                     </div>
                   <% end %>
                 </div>
@@ -73,8 +73,7 @@
       width: '100%'
     };
     select2ColorConfig = select2DimensionConfig = select2QuantityConfig = select2BaseConfig;
-
-    $(".select_dimension, .select_quantity").prop("disabled", true);
+    $('.select_color, .select_dimension, .select_quantity').select2(select2BaseConfig);
 
     $('.product-slick').slick({
       dots: true,
@@ -82,7 +81,7 @@
       speed: 500,
       fade: true
     });
-    $('.select_color, .select_dimension, .select_quantity').select2(select2BaseConfig);
+
 
     function getProductColorOption(){
       $.ajax({

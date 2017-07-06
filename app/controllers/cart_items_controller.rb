@@ -1,7 +1,7 @@
 class CartItemsController < ApplicationController
   def destroy
     @cart = current_cart
-    @item = @cart.find_cart_item(params[:id])
+    @item = @cart.cart_items.find(params[:id])
     @product = @item.product
 
     @item.destroy
@@ -12,16 +12,28 @@ class CartItemsController < ApplicationController
 
   def update
     @cart = current_cart
-    @item = @cart.find_cart_item(params[:id])
+    @item = @cart.cart_items.find(params[:id])
 
-    if @item.product.quantity >= item_params[:quantity].to_i
-       @item.update(item_params)
-       flash[:notice] = "成功將#{@item.product.title}數量更新為#{@item.quantity}"
+    puts "--------------------------------------------"
+    puts !params[:cart_item].blank?
+    puts !item_params[:color_id].blank?
+    puts !item_params[:dimension_id].blank?
+    puts !item_params[:quantity].blank?
+
+    puts "--------------------------------------------"
+
+
+    if !item_params[:color_id].blank? && !item_params[:dimension_id].blank? && !item_params[:quantity].blank?
+      @inventory = Inventory.getInventory(@item.product.id, params[:cart_item][:color_id], params[:cart_item][:dimension_id])
+      if @inventory.first.quantity >= item_params[:quantity].to_i && item_params[:quantity] > 0
+        @item.update(item_params)
+        flash[:notice] = "成功將#{@item.product.title}顏色、尺吋、數量更新"
+      else
+        flash[:warning] = "數量不足以加入購物車"
+      end
     else
-       flash[:warning] = "數量不足以加入購物車"
+      flash[:warning] = "欄位資訊漏填"
     end
-
-
 
     redirect_to carts_path
 
@@ -30,6 +42,6 @@ class CartItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:cart_item).permit(:quantity)
+    params.require(:cart_item).permit(:color_id,:dimension_id,:quantity)
   end
 end
