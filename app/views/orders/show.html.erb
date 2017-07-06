@@ -4,7 +4,9 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th width="80%">商品明細</th>
+          <th width="70%">商品明細</th>
+          <th>顏色</th>
+          <th>尺吋</th>
           <th>單價</th>
           <th>數量</th>
         </tr>
@@ -13,6 +15,8 @@
         <% @order_items.each do |order_item| %>
           <tr>
             <td><%= order_item.product_name %></td>
+            <td><%= order_item.color_name %></td>
+            <td><%= order_item.dimension_name %></td>
             <td><%= order_item.price %></td>
             <td><%= order_item.quantity %></td>
           </tr>

@@ -4,19 +4,27 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th width="80%">商品明細</th>
+          <th width="70%">商品明細</th>
+          <th>顏色</th>
+          <th>尺吋</th>
           <th>單價</th>
+          <th>數量</th>
+          <th>小計</th>
         </tr>
       </thead>
       <tbody>
-        <% current_cart.items.each do  |product|%>
+        <% current_cart.cart_items.each do  |cart_item|%>
           <tr>
             <td>
-              <%= link_to(product.title, product_path(product)) %>
+              <%= link_to(cart_item.product.title, product_path(cart_item.product)) %>
             </td>
+            <td><%= cart_item.color.name %></td>
+            <td><%= cart_item.dimension.name %></td>
             <td>
-              <%= product.price %>
+              <%= cart_item.product.price %>
             </td>
+            <td><%= cart_item.quantity %></td>
+            <td><%= render_cart_item_sub_total(cart_item) %></td>
           </tr>
         <% end %>
       </tbody>
