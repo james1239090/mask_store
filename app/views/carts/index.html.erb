@@ -43,10 +43,10 @@
                   </td>
 
                   <td><%= cart_item.product.price %></td>
-                  <td>
-                    <%= f.submit "更新", data: {disable_with: "Submiting..."} %>
+                  <td >
+                    <%= f.submit "更新", data: {disable_with: "Submiting..."}, class: "btn btn-primary btn-outline" %>
                   <% end %>
-                  <%= link_to item_path(cart_item), method: :delete do  %>
+                  <%= link_to item_path(cart_item), method: :delete , class: "btn btn-danger btn-outline" do  %>
                     <i class="fa fa-trash"></i>
                   <% end %>
                 </td>
