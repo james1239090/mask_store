@@ -109,15 +109,22 @@ class Inventory < ApplicationRecord
     final_quantity = original_quantity - change_quantity
     final_cost = inventory_transaction.final_cost
 
-    inventory_transaction.update(original_cost: original_cost,
-                                 original_quantity: original_quantity,
-                                 change_cost: change_cost,
-                                 change_quantity: change_quantity,
-                                 final_cost: final_cost,
-                                 final_quantity: final_quantity
-                                 )
-    self.cost = final_cost
-    self.quantity = final_quantity
-    self.save
+    if inventory_transaction.update(original_cost: original_cost,
+                                    original_quantity: original_quantity,
+                                    change_cost: change_cost,
+                                    change_quantity: change_quantity,
+                                    final_cost: final_cost,
+                                    final_quantity: final_quantity
+                                    )
+
+      self.cost = final_cost
+      self.quantity = final_quantity
+      self.save
+    else
+      puts "-----------------"
+      puts "#{inventory_transaction.errors.messages}"
+    end
+
+
   end
 end

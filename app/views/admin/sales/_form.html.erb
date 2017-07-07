@@ -33,8 +33,8 @@
           <%= f.input :sale_platform_id, collection: SalePlatform.all, value_method: :id, label_method: :name%>
           <%= f.input :ship_type_id, collection: Sale.ship_type_ids.keys %>
           <%= f.input :shipping_number %>
-          <%= f.input :sale_date,as: :date, html5: true %>
-          <%= f.input :shipping_date,as: :date, html5: true %>
+          <%= f.input :sale_date, as: :date_time_picker, :input_html => { :value => render_date_time_picker_format(f.object.sale_date) } %>
+          <%= f.input :shipping_date , as: :date_time_picker, :input_html => { :value => render_date_time_picker_format(f.object.shipping_date) } %>
         </div>
       </div>
     </div>
@@ -42,3 +42,14 @@
     <%= f.submit "Submit", class:"btn btn-info pull-right",data:{ disable_with: "Submitting..." } %>
   </div>
 <% end %>
+<script type="text/javascript">
+  $(function(){
+   $('.input-group.date').datepicker({
+      format: "yyyy/mm/dd",
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      autoclose: true
+    });
+  });
+</script>

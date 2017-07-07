@@ -64,4 +64,5 @@ class Sale < ApplicationRecord
 
 
 
+
 end

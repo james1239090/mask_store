@@ -1,3 +1,5 @@
+//= require datapicker/bootstrap-datepicker.js
+
 function paramformat(item) {
 	return item.title;
 }

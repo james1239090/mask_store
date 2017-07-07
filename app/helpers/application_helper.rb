@@ -41,5 +41,11 @@ module ApplicationHelper
 
   end
 
-
+  def render_date_time_picker_format(date)
+    if date
+      date.strftime("%Y/%m/%d")
+    else
+      ""
+    end
+  end
 end
