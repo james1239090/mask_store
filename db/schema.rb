@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170706062840) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
     t.integer  "product_id"
@@ -46,7 +49,7 @@ ActiveRecord::Schema.define(version: 20170706062840) do
     t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
   create_table "dimensions", force: :cascade do |t|
@@ -109,8 +112,8 @@ ActiveRecord::Schema.define(version: 20170706062840) do
     t.boolean  "is_paid",        default: false
     t.string   "payment_method"
     t.string   "aasm_state",     default: "order_placed"
-    t.index ["aasm_state"], name: "index_orders_on_aasm_state"
-    t.index ["token"], name: "index_orders_on_token"
+    t.index ["aasm_state"], name: "index_orders_on_aasm_state", using: :btree
+    t.index ["token"], name: "index_orders_on_token", using: :btree
   end
 
   create_table "photos", force: :cascade do |t|
@@ -229,8 +232,8 @@ ActiveRecord::Schema.define(version: 20170706062840) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.boolean  "is_admin",               default: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
 end
