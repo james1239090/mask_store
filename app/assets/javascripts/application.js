@@ -28,6 +28,7 @@
 //= require peity/jquery.peity.min.js
 //= require slimscroll/jquery.slimscroll.min.js
 //= require jquery.slick
+//= require_tree
 
 $(function() {
   Dropzone.autoDiscover = false;

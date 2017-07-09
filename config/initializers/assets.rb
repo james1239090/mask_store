@@ -14,9 +14,16 @@ Rails.application.config.assets.version = '1.0'
    admin/products admin/purchases admin/sale_platforms admin/sales admin/users
    admin cart_items carts orders products).each do |controller|
   Rails.application.config.assets.precompile += [
-      "#{controller}.coffee",
-      "#{controller}.js.coffee",
-      "#{controller}.css"
+    "#{controller}.js",
+    "#{controller}.css",
   ]
-  Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
 end
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+
+
+# Rails.application.config.assets.precompile += %w(
+#     account/orders.js account/orders.css admin/products.js admin/products.css
+#     products.js products.css
+#     *.ttf *.svg *.eot *.woff
+#     *.png *.gif *.jpg *.jpeg )
