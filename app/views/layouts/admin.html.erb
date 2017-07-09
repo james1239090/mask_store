@@ -3,7 +3,7 @@
   <head>
     <title>MaskStore 後台</title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css") %>
+    <%= stylesheet_link_tag params[:controller] if ::Rails.application.assets_manifest.find_sources("#{params[:controller]}.css") %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
     <meta name="turbolinks-cache-control" content="no-preview">
@@ -20,7 +20,7 @@
         <%= yield %>
       </div>
     </div>
-    <%= javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js") %>
+    <%= javascript_include_tag params[:controller] if ::Rails.application.assets_manifest.find_sources("#{params[:controller]}.js") %>
     <%= yield :javascript %>
   </body>
 </html>

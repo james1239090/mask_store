@@ -3,7 +3,7 @@
   <head>
     <title>Maskstore</title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css") %>
+    <%= stylesheet_link_tag params[:controller] if ::Rails.application.assets_manifest.find_sources("#{params[:controller]}.css") %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </head>
@@ -18,7 +18,7 @@
           <%= yield %>
         </div>
       </div>
-      <%= javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js") %>
+      <%= javascript_include_tag params[:controller] if ::Rails.application.assets_manifest.find_sources("#{params[:controller]}.js") %>
       <%= yield :javascript %>
     </div>
   </body>
