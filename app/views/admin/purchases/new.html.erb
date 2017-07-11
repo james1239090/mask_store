@@ -8,6 +8,8 @@
 </div>
 <script type="text/javascript">
   $(function(){
-    $("#add_item").click();
+    if ($(".row.nested-fields.form-group").length === 1){
+      $("#add_item").click();
+    }
   });
 </script>
