@@ -88,7 +88,7 @@
 
     function getProductColorOption(){
       $.ajax({
-        url: "/admin/inventories.json",
+        url: "/inventories.json",
         dataType: "JSON",
         data: {
           getColorOption: <%= @product.id %>
@@ -109,7 +109,7 @@
       var color_id = $(this).val(),
         $select_product = <%= @product.id %>,
         $selct_dimension = $(".select_dimension");
-        url = "/admin/inventories.json";
+        url = "/inventories.json";
       $.ajax({
         url: url,
         dataType: "JSON",
@@ -132,7 +132,7 @@
         $select_product = <%= @product.id %>,
         $select_color = $(".select_color").val(),
         $select_quantity = $(".select_quantity");
-        url = "/admin/inventories.json";
+        url = "/inventories.json";
       $.ajax({
         url: url,
         dataType: "JSON",
