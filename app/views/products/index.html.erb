@@ -32,6 +32,9 @@
     <% end %>
   </div>
 </div>
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
 <script type="text/javascript">
   $(function() {
     $('.product-slick').slick({
