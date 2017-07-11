@@ -1,0 +1,22 @@
+<div class="middle-box loginscreen  animated fadeInDown">
+  <div>
+    <div>
+      <h1 class="logo-name">Respro</h1>
+    </div>
+    <h3>Welcome to MaskStore</h3>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: "m-t") do |f| %>
+      <div class="form-group">
+        <%= f.input :email, required: false, autofocus: true, placeholder: "Email", label: false %>
+      </div>
+      <div class="form-group">
+        <%= f.input :password, required: false, placeholder: "Password", label: false %>
+      </div>
+      <div class="form-group">
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
+      <%= f.button :submit, "Log in", class: "btn btn-primary block full-width m-b" %>
+    <% end %>
+
+  </div>
+   <%= render "devise/shared/links" %>
+</div>

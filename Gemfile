@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'devise-i18n'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'carrierwave', '~> 1.0'
@@ -58,13 +59,13 @@ gem 'gon'
 gem 'sprockets-rails'
 gem 'rails-i18n', '~> 5.0.0' # For 5.0.x and 5.1.x
 gem "jquery-slick-rails"
-
+gem "pg"
 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem "pg"
+
 end
 
 group :development do
@@ -81,7 +82,7 @@ group :development do
 end
 
 group :production do
-  gem "pg"
+
   gem "rails_12factor"
 end
 
