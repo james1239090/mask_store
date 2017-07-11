@@ -3,6 +3,7 @@ class Admin::UsersController < AdminController
 
   def index
     @users = User.all
+    @admins = @users.where(:is_admin=> true).count
   end
 
 
