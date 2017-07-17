@@ -24,13 +24,14 @@
               Hi, <%= current_user.email %>
               <b class="caret"></b>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu animated fadeInRight m-t-xs">
               <% if current_user.admin? %>
                   <li>
                     <%= link_to("Admin 選單", admin_products_path) %>
                   </li>
               <% end %>
               <li><%= link_to("我的訂單",account_orders_path) %></li>
+              <li class="divider"></li>
               <li>
                 <%= link_to("登出",destroy_user_session_path, method: :delete) %>
               </li>
