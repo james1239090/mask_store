@@ -5,19 +5,7 @@
         <div class="ibox">
           <div class="ibox-content product-box">
             <div class="product-slick">
-              <% if product.photo.present? %>
-                <% product.photo.images.each do |image| %>
-                  <div>
-                    <div class="ibox-content">
-                      <%= image_tag(image.thumb.url) %>
-                    </div>
-                  </div>
-                <% end %>
-              <% else %>
-                <div class="ibox-content">
-                  <%= image_tag("http://placehold.it/200x200&text=No Pic") %>
-                </div>
-              <% end %>
+              <%= render :partial => "common/product_images" , locals:{ product: product, image_type: "thumb" }%>
             </div>
             <div class="product-desc">
               <span class="product-price">

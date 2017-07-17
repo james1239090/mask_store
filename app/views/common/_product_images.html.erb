@@ -1,0 +1,13 @@
+<% if product.photo.images.present? %>
+  <% product.photo.images.each do |image| %>
+    <div>
+      <div class="ibox-content">
+        <%= image_tag(image.send(image_type).url) %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="ibox-content">
+    <%= image_tag("http://placehold.it/200x200&text=No Pic") %>
+  </div>
+<% end %>

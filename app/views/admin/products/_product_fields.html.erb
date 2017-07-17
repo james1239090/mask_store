@@ -6,15 +6,7 @@
   <td class="align-text-top">
     <%= link_to product_path(product) do %>
       <div class="row">
-        <% if product.photo.present? %>
-          <% product.photo.images.each do |image| %>
-            <div class="col-md-6">
-              <%= image_tag(image.thumb.url, class:"thumbnail") %>
-            </div>
-          <% end %>
-        <% else %>
-          <%= image_tag("http://placehold.it/200x200&text=No Pic",class:"thumbnail") %>
-        <% end %>
+        <%= render :partial => "common/product_images" , locals:{ product: product, image_type: "thumb" }%>
       </div>
     <% end %>
   </td>

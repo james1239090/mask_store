@@ -6,15 +6,7 @@
           <div class="row">
             <div class="col-md-5">
               <div class="product-slick">
-                <% if @product.photo.present? %>
-                  <% @product.photo.images.each do |image| %>
-                    <div>
-                      <%= image_tag(image.medium.url, class:"thumbnail") %>
-                    </div>
-                  <% end %>
-                <% else %>
-                  <%= image_tag("http://placehold.it/200x200&text=No Pic") %>
-                <% end %>
+                <%= render :partial => "common/product_images" , locals:{ product: @product, image_type: "medium" }%>
               </div>
             </div>
             <div class="col-md-7">
