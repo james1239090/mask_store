@@ -8,58 +8,57 @@
 </div>
 <script type="text/javascript">
   $(function(){
-        var post_url = "/admin/products/"+<%= @product.id %>+"/photos";
-        var myDropzone = new Dropzone("#myDropzone", {
-          url: post_url,
-          method: "POST",
-          paramName: "photo[images]",
-          uploadMultiple: true,
-          autoProcessQueue: false,
-          addRemoveLinks: true,
-          parallelUploads: 100,
-          maxFiles: 100,
-          removedfile: function(file){
-            var _ref,
-                product_id = file.product_id,
-                image_index = file.index,
-                url = "/admin/products/" + product_id + "/photos/" + image_index;
-            $.ajax({
-                type: 'DELETE',
-                url: url
-            });
-            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-          },
-          headers: {
-          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
-          init: function() {
-            var myDropzone = this;
-            $("input[type='submit']").on("click", function(e) {
-                if (myDropzone.getQueuedFiles().length > 0) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    myDropzone.processQueue();
-                    return;
-                }
-            });
-            this.on("successmultiple", function(files, response) {
-              $('form').submit();
-            });
-          }
+    var post_url = "/admin/products/"+<%= @product.id %>+"/photos";
+    var myDropzone = new Dropzone("#myDropzone", {
+      url: post_url,
+      method: "POST",
+      paramName: "photo[images]",
+      uploadMultiple: true,
+      autoProcessQueue: false,
+      addRemoveLinks: true,
+      parallelUploads: 100,
+      maxFiles: 100,
+      removedfile: function(file){
+        var _ref,
+            product_id = file.product_id,
+            image_index = file.index,
+            url = "/admin/products/" + product_id + "/photos/" + image_index;
+        $.ajax({
+            type: 'DELETE',
+            url: url
         });
-        <% if !@product.photo.blank? %>
-             <% @product.photo.images.each_with_index do |image, index| %>
-                var mockFile = {
-                  name: "<%= image.file.filename %>",
-                  size: <%= image.size %>,
-                  index: <%= index %>,
-                  product_id : <%= @product.id %>
-                }
-                myDropzone.emit("addedfile", mockFile);
-                myDropzone.createThumbnailFromUrl(mockFile, "<%= image.url %>");
-                myDropzone.emit("complete", mockFile);
-                myDropzone.files.push(mockFile);
-            <% end %>
+        return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+      },
+      headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+      init: function() {
+        var myDropzone = this;
+        $("input[type='submit']").on("click", function(e) {
+            if (myDropzone.getQueuedFiles().length > 0) {
+                e.preventDefault();
+                e.stopPropagation();
+                myDropzone.processQueue();
+                return;
+            }
+        });
+        this.on("successmultiple", function(files, response) {
+          $('form').submit();
+        });
+      }
+    });
+    <% if @product.photo.images.present? %>
+         <% @product.photo.images.each_with_index do |image, index| %>
+            var mockFile = {
+              name: "<%= image.file.filename %>",
+              size: <%= image.size %>,
+              index: <%= index %>,
+              product_id : <%= @product.id %>
+            };
+            myDropzone.emit("addedfile", mockFile);
+            myDropzone.createThumbnailFromUrl(mockFile, "<%= image.url %>",null, "anonymous");
+            myDropzone.emit("complete", mockFile);
+            myDropzone.files.push(mockFile);
         <% end %>
-
-      });
+    <% end %>
+  });
 </script>
